@@ -4,7 +4,8 @@
 class ComputerPlayer : public Player
 {
 public:
-    ComputerPlayer();
+    ComputerPlayer(QObject *parent);
+    play();
 };
 
 #endif // COMPUTERPLAYER_H

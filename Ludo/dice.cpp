@@ -1,5 +1,5 @@
 #include "dice.h"
 
-Dice::Dice()
-{
+Dice::Dice(QObject *parent){
+
 }
