@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><umlet_diagram><help_text>// Uncomment the following line to change the fontsize:
+// fontsize=14
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+// Welcome to UMLet!
+//
+// Double-click on UML elements to add them to the diagram, or to copy them
+// Edit elements by modifying the text in this panel
+// Hold Ctrl to select multiple elements
+// Use Ctrl+mouse to select via lasso
+//
+// Use ± or Ctrl+mouse wheel to zoom
+// Drag a whole relation at its central square icon
+//
+// Press Ctrl+C to copy the whole diagram to the system clipboard (then just paste it to, eg, Word)
+// Edit the files in the "palettes" directory to create your own element palettes
+//
+// Select "Custom Elements &gt; New..." to create new element types
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+// This text will be stored with each diagram;  use it for notes.</help_text><zoom_level>10</zoom_level><element><type>com.umlet.element.base.Class</type><coordinates><x>110</x><y>50</y><w>240</w><h>210</h></coordinates><panel_attributes>Player
+--
+-figure:*Figure[4] {frozen}
+-start:*Field {frozen}
+-end:*Field {frozen}
+-startHouse:*StartHouse {frozen}
+-endHouse:*EndHouse {frozen}
+--
++rollDice(Dice* dice):int
++moveFigure(Figure* figure)
++setFigureToStart()
++hasWon():bool
+
+
+</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Class</type><coordinates><x>730</x><y>50</y><w>190</w><h>90</h></coordinates><panel_attributes>Dice
+--
+-value:int
+--
++roll():int
++getValue():int
+</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Class</type><coordinates><x>430</x><y>50</y><w>190</w><h>90</h></coordinates><panel_attributes>Figure
+--
+_-player:*Player_
+-currentPos:Field
+--
++move(int value)
+</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>320</x><y>70</y><w>130</w><h>50</h></coordinates><panel_attributes>m1=1
+m2=*</panel_attributes><additional_attributes>30;30;110;30</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>440</x><y>230</y><w>170</w><h>140</h></coordinates><panel_attributes>Field
+--
+-figure:*Figure
+-next:*Field
+-x:int
+y:int
+--
++containsFigure():*Figure
++getNext():*Field
+
+</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>490</x><y>110</y><w>50</w><h>140</h></coordinates><panel_attributes>m1=1
+m2=1
+</panel_attributes><additional_attributes>30;30;30;120</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>410</x><y>420</y><w>260</w><h>120</h></coordinates><panel_attributes>Game
+--
+-players:*Player[4]
+-map:*Map
+-dice:Dice
+--
++start()
++stop()
+</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Class</type><coordinates><x>120</x><y>340</y><w>170</w><h>80</h></coordinates><panel_attributes>ComputerPlayer
+--
+
+--
++play()
+</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>640</x><y>320</y><w>180</w><h>170</h></coordinates><panel_attributes>m1=1
+m2=1</panel_attributes><additional_attributes>160;30;160;150;30;150</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>190</x><y>230</y><w>50</w><h>130</h></coordinates><panel_attributes>lt=&lt;&lt;-</panel_attributes><additional_attributes>30;30;30;110</additional_attributes></element><element><type>com.umlet.element.base.Class</type><coordinates><x>720</x><y>290</y><w>160</w><h>60</h></coordinates><panel_attributes>Map
+--
+--
+_+createMap()_
+
+</panel_attributes><additional_attributes/></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>640</x><y>110</y><w>290</w><h>430</h></coordinates><panel_attributes>m1=1
+m2=1</panel_attributes><additional_attributes>270;30;270;410;30;410</additional_attributes></element><element><type>com.umlet.element.base.Relation</type><coordinates><x>280</x><y>230</y><w>150</w><h>260</h></coordinates><panel_attributes>m1=*
+m2=1</panel_attributes><additional_attributes>30;30;30;240;130;240</additional_attributes></element></umlet_diagram>
