@@ -13,8 +13,22 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        ludo.cpp
+        ludo.cpp \
+    player.cpp \
+    figure.cpp \
+    field.cpp \
+    dice.cpp \
+    map.cpp \
+    game.cpp \
+    computerplayer.cpp
 
-HEADERS  += ludo.h
+HEADERS  += ludo.h \
+    player.h \
+    figure.h \
+    field.h \
+    dice.h \
+    map.h \
+    game.h \
+    computerplayer.h
 
 FORMS    += ludo.ui
