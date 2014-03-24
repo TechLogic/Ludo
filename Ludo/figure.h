@@ -1,14 +1,18 @@
+#include<QGraphicsView>
+#include<QObject>
+
 #ifndef FIGURE_H
 #define FIGURE_H
+
 
 class Figure : public QGraphicsView
 {
 public:
     Figure(QObject *parent);
-    move(int value);
+    void move(int value);
 private:
-    const Player* player;
-    Field* currentPos;
+    const QObject* player;
+    QObject* currentPos;
 };
 
 #endif // FIGURE_H

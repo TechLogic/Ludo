@@ -1,14 +1,16 @@
 #ifndef FIELD_H
 #define FIELD_H
+#include<QGraphicsView>
+#include<QObject>
 
 class Field : public QGraphicsView
 {
 public:
     Field(QObject *parent);
-    Figure* containsFigure();
+    QObject* containsFigure();
     Field* getNext();
 private:
-    Figure* figure;
+    QObject* figure;
     Field* next;
     int x;
     int y;

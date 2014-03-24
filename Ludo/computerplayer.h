@@ -1,11 +1,12 @@
 #ifndef COMPUTERPLAYER_H
 #define COMPUTERPLAYER_H
 
+#include "player.h"
 class ComputerPlayer : public Player
 {
 public:
     ComputerPlayer(QObject *parent);
-    play();
+    void play();
 };
 
 #endif // COMPUTERPLAYER_H

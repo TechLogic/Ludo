@@ -31,4 +31,3 @@ HEADERS  += ludo.h \
     game.h \
     computerplayer.h
 
-FORMS    += ludo.ui

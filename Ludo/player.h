@@ -1,5 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
+#include "dice.h"
+#include "figure.h"
+#include "field.h"
 
 class Player : public QObject
 {

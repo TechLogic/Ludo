@@ -1,5 +1,8 @@
 #ifndef DICE_H
 #define DICE_H
+#include<QObject>
+#include <cstdlib>
+
 
 class Dice : public QObject
 {

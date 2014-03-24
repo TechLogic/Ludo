@@ -1,5 +1,4 @@
 #include "dice.h"
-#include <cstdlib>
 
 Dice::Dice(QObject *parent): QObject(parent){
 }

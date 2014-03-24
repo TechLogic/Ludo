@@ -1,5 +1,5 @@
 #include "computerplayer.h"
 
-ComputerPlayer::ComputerPlayer()
+ComputerPlayer::ComputerPlayer(QObject *parent): Player(parent)
 {
 }
