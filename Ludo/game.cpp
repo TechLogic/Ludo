@@ -1,4 +1,4 @@
 #include "game.h"
 
-Game::Game(QObject *parent, Player *player):QObject(parent),map(parent),players(player),dice(new Dice(parent)){
+Game::Game(QObject *parent, Player *player):QObject(parent),players(player),map(parent),dice(new Dice(parent)){
 }

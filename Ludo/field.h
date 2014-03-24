@@ -1,12 +1,13 @@
 #ifndef FIELD_H
 #define FIELD_H
-#include<QGraphicsView>
+#include<QLabel>
 #include<QObject>
+#include<QWidget>
 
-class Field : public QGraphicsView
+class Field : public QLabel
 {
 public:
-    Field(QObject *parent);
+    Field(QWidget *parent);
     QObject* containsFigure();
     Field* getNext();
 private:

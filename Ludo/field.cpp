@@ -1,3 +1,3 @@
 #include "field.h"
-Field::Field(QObject *parent){
+Field::Field(QWidget *parent):QLabel(parent){
 }

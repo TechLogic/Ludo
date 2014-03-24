@@ -1,6 +1,6 @@
 #include "figure.h"
 #include <QObject>
 
-Figure::Figure(QObject *parent){
+Figure::Figure(QWidget *parent): QLabel(parent){
 
 }
