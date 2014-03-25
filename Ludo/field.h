@@ -10,6 +10,8 @@ public:
     Field(QWidget *parent);
     QObject* containsFigure();
     Field* getNext();
+    void setFigure(QObject* f);
+    void removeFigure();
 private:
     QObject* figure;
     Field* next;

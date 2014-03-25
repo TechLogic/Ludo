@@ -13,7 +13,7 @@ public:
     void move(int value);
 private:
     const QObject* player;
-    QObject* currentPos;
+    QWidget* currentPos;
 };
 
 #endif // FIGURE_H
