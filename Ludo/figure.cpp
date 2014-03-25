@@ -1,26 +1,31 @@
 #include "figure.h"
 #include <QObject>
 #include"field.h"
-Figure::Figure(QWidget *parent): QLabel(parent){
+#include "player.h"
+Figure::Figure(QWidget *parent, QObject *player): QLabel(parent),player(player){
 
 }
 
-void Figure::move(int value){
+bool Figure::move(int value){
 
     Field *field = (Field*) currentPos;
+    Player *p = (Player*)player;
+    Field *end =p->getEnd();
     for(int i = value;i>0;i--){
-        if(field->getNext() != NULL){
+
+        if(field->getNext() == NULL){
+            return false;
+        }
+
+        if(&field->getNext() != &end){
             field = field->getNext();
         }else{
-            field = NULL;
-            break;
+            field = p->getHome();
         }
     }
-    if(field != NULL){
-        ((Field*)currentPos)->removeFigure();
+
+    ((Field*)currentPos)->removeFigure();
         field->setFigure(this);
         currentPos = field;
-    }
-
-
+    return true;
 }

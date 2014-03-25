@@ -9,8 +9,8 @@
 class Figure : public QLabel
 {
 public:
-    Figure(QWidget *parent);
-    void move(int value);
+    Figure(QWidget *parent,QObject* player);
+    bool move(int value);
 private:
     const QObject* player;
     QWidget* currentPos;

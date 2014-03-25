@@ -12,10 +12,13 @@ public:
     void moveFigure(const Figure* figure);
     void setFigureToStart();
     bool hasWon();
+    Field* getEnd();
+    Field* getHome();
 private:
     const Figure figures[];
     const Field* start;
     const Field* end;
+    const Field* home;
 
 
 };
