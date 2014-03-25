@@ -29,3 +29,7 @@ bool Figure::move(int value){
         currentPos = field;
     return true;
 }
+
+void Figure::setPosition(QWidget *field){
+    currentPos = field;
+}
