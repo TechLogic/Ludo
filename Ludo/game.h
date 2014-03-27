@@ -7,14 +7,18 @@
 
 class Game : public QObject
 {
+    Q_OBJECT
 public:
     Game(QObject *parent,Player *player);
     void start();
     void stop();
+
 private:
     Player *players;
     Map map;
     Dice dice;
+    int rollDice();
+    void moveFigure(const Figure* figure);
 };
 
 #endif // GAME_H

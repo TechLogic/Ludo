@@ -8,6 +8,7 @@
 
 class Figure : public QLabel
 {
+    Q_OBJECT
 public:
     Figure(QWidget *parent,QObject* player);
     bool move(int value);
