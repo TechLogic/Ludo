@@ -10,6 +10,8 @@ Map::Map(QObject *parent):QObject(parent)
 QGridLayout* Map::createGrid(){
     QGridLayout *layout = new QGridLayout();
    // w->setLayout(layout);
+
+
     return layout;
 }
 
@@ -18,10 +20,10 @@ QGridLayout* Map::createGrid(){
 
 void Map::createField(Field * field,int x, int y){
 
-    field->setPixmap(QPixmap(QString::fromUtf8(":/image/FIELD")));
+    field->setPixmap(QPixmap(QString::fromUtf8(":/image/field")));
     field->setFixedSize(25,25);
     field->setScaledContents(true);
-    layout->addWidget(field,x+1,y+1);
+    layout->addWidget(field,x,y);
 }
 
 void Map::createHouse(QGridLayout * grid){
@@ -35,23 +37,25 @@ void Map::createSpecialPoints(QGridLayout * grid){
             }
 
  QGridLayout * Map::createMap(){
-     int x=0,y=0;
+     int x=1,y=0;
      start= new Field(w);
      Field * field=start;
 
-
-     for(int i=1;i<41;i++){
+     //createField(field,0,0);
+     for(int i=1;i<=41;i++){
          field->setNext(new Field(w));
          field=field->getNext();
-         if(i>10)
+         if(i<11)
              x++;
-         if(i>=10 && i<=21)
+         else if(i>=11 && i<21)
              y++;
-         if(i>21 && i<=32)
+         else if(i>=21 && i<31)
              x--;
-         if(i>32 && i<41)
+         else if(i>=31 && i<=41)
              y--;
-    createField(field,x,y);
+        createField(field,x,y);
      }
+
+     field->setNext(start);
      return layout;
 }

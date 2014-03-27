@@ -1,5 +1,5 @@
 <RCC>
     <qresource prefix="/image">
-        <file>normalField.jpg</file>
+        <file alias="field">normalField.jpg</file>
     </qresource>
 </RCC>
