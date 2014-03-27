@@ -40,7 +40,7 @@ void Map::createSpecialPoints(QGridLayout * grid){
 
 
      for(int i=1;i<41;i++){
-         field->next= new Field(w);
+         field->setNext= new Field(w);
          field=field->next;
          if(i>10)
              x++;

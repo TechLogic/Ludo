@@ -1,10 +1,20 @@
 #include "ludo.h"
 #include <QApplication>
+#include "map.h"
+#include <QObject>
 
 int main(int argc, char *argv[])
 {
+    QObject parent;
     QApplication a(argc, argv);
-    Ludo w;
+    QWidget w;
+    Map p(&parent);
+    w.setMinimumSize(500,500);
+    w.setWindowTitle(
+    QApplication::translate("Ludo", "Ludo"));
+   QGridLayout *layout=p.createMap();
+
+
     w.show();
     
     return a.exec();
