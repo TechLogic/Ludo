@@ -4,6 +4,7 @@
 #include "player.h"
 class ComputerPlayer : public Player
 {
+Q_OBJECT
 public:
     ComputerPlayer(QObject *parent);
     void play();

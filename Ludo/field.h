@@ -6,6 +6,7 @@
 
 class Field : public QLabel
 {
+    Q_OBJECT
 public:
     Field(QWidget *parent);
     QObject* containsFigure();

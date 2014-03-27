@@ -4,3 +4,5 @@
 Player::Player(QObject *parent):QObject(parent)
 {
 }
+
+

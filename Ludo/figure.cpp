@@ -17,7 +17,7 @@ bool Figure::move(int value){
             return false;
         }
 
-        if(&field->getNext() != &end){
+        if(field->getNext() != end){
             field = field->getNext();
         }else{
             field = p->getHome();
