@@ -15,10 +15,12 @@ public:
 
 private:
     Player *players;
+    Player *active;
     Map map;
     Dice dice;
+    int DiceValue;
     int rollDice();
-    void moveFigure(const Figure* figure);
+    bool moveFigure(Figure *figure);
 };
 
 #endif // GAME_H

@@ -13,9 +13,10 @@ public:
     bool hasWon();
      Field* getEnd();
      Field *getHome();
+     bool hasFigure(Figure *figure);
 
 private:
-    const Figure figures[];
+     Figure figures[];
      Field* start;
      Field* end;
      Field* home;

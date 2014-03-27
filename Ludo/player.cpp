@@ -33,5 +33,18 @@ void Player::setFigureToStart(){
 
 }
 
+bool Player::hasFigure(Figure *figure){
+
+    Figure* f = figures;
+        Figure* end = f + sizeof(figures)/sizeof(figures[0]);
+        while(f < end){
+        if(f == figure){
+           return true;
+       }
+       f++;
+    }
+   return false;
+}
+
 
 
