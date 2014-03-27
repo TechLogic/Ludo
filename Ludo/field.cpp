@@ -1,5 +1,8 @@
 #include "field.h"
-Field::Field(QWidget *parent):QLabel(parent){
+Field::Field(QWidget *parent):QLabel(parent),next(NULL){
+}
+ Field::~Field(){
+    next=NULL;
 }
 
 Field* Field::getNext(){
@@ -17,4 +20,14 @@ Field* Field::getNext(){
 
    void Field::removeFigure(){
     figure = NULL;
+   }
+
+   void Field::setNext(Field * field){
+       if(this->next!=NULL){
+           field->next=this->next;
+
+       }
+
+       this->next=field;
+
    }

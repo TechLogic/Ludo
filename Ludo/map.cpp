@@ -2,7 +2,8 @@
 
 Map::Map(QObject *parent):QObject(parent)
 {
-
+    w= new QWidget();
+    layout=createGrid();
 }
 
 
@@ -17,10 +18,10 @@ QGridLayout* Map::createGrid(){
 
 void Map::createField(Field * field,int x, int y){
 
-    field->setPixmap(QPixmap(QString::fromUtf8(":/picture/FIELD")));
+    field->setPixmap(QPixmap(QString::fromUtf8(":/image/FIELD")));
     field->setFixedSize(25,25);
     field->setScaledContents(true);
-    layout->addWidget(field,x,y);
+    layout->addWidget(field,x+1,y+1);
 }
 
 void Map::createHouse(QGridLayout * grid){
@@ -40,8 +41,8 @@ void Map::createSpecialPoints(QGridLayout * grid){
 
 
      for(int i=1;i<41;i++){
-         field->next= new Field(w);
-         field=field->next;
+         field->setNext(new Field(w));
+         field=field->getNext();
          if(i>10)
              x++;
          if(i>=10 && i<=21)
@@ -52,5 +53,5 @@ void Map::createSpecialPoints(QGridLayout * grid){
              y--;
     createField(field,x,y);
      }
-     return createGrid();
+     return layout;
 }

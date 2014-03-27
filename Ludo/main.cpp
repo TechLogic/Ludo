@@ -12,8 +12,8 @@ int main(int argc, char *argv[])
     w.setMinimumSize(500,500);
     w.setWindowTitle(
     QApplication::translate("Ludo", "Ludo"));
-   QGridLayout *layout=p.createMap();
-
+    QGridLayout *layout=p.createMap();
+    w.setLayout(layout);
 
     w.show();
     

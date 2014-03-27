@@ -9,8 +9,10 @@ class Field : public QLabel
     Q_OBJECT
 public:
     Field(QWidget *parent);
+    ~Field();
     QObject* containsFigure();
     Field* getNext();
+    void setNext(Field *field);
     void setFigure(QObject* f);
     void removeFigure();
 private:

@@ -31,3 +31,6 @@ HEADERS  += ludo.h \
     game.h \
     computerplayer.h
 
+RESOURCES += \
+    picture.qrc
+
