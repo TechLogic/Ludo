@@ -5,6 +5,7 @@
 #include"field.h"
 class Map : public QObject
 {
+    Q_OBJECT
 public:
     Map(QObject *parent);
     static Map* createMap(QObject *parent);

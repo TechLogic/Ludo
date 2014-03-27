@@ -6,16 +6,20 @@
 
 class Player : public QObject
 {
+    Q_OBJECT
 public:
     Player(QObject *parent);
-    int rollDice(Dice *dice);
-    void moveFigure(const Figure* figure);
     void setFigureToStart();
     bool hasWon();
+     Field* getEnd();
+     Field *getHome();
+     bool hasFigure(Figure *figure);
+
 private:
-    const Figure figures[];
-    const Field* start;
-    const Field* end;
+     Figure figures[];
+     Field* start;
+     Field* end;
+     Field* home;
 
 
 };

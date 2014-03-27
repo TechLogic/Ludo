@@ -6,6 +6,7 @@
 
 class Dice : public QObject
 {
+Q_OBJECT
 public:
     Dice(QObject *parent);
     int roll();
