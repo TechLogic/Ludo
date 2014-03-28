@@ -22,7 +22,6 @@ signals: void clicked(Figure*); void enter(Figure*); void leave(Figure*);
 protected:
    void mousePressEvent(QMouseEvent *ev);
    bool eventFilter(QObject *obj, QEvent *event);
->>>>>>> TechLogic
 private:
     const QObject* player;
     QWidget* currentPos;
