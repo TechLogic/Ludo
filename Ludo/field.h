@@ -15,6 +15,7 @@ public:
     void setNext(Field *field);
     void setFigure(QObject* f);
     void removeFigure();
+    QString text;
 private:
     QObject* figure;
     Field* next;

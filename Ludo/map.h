@@ -3,6 +3,8 @@
 #include <QObject>
 #include<QGridLayout>
 #include"field.h"
+#include "figure.h"
+#include "player.h"
 class Map : public QObject
 {
     Q_OBJECT
@@ -10,6 +12,8 @@ public:
     Map(QObject *parent);
     static Map* createMap(QObject *parent);
     QGridLayout * createMap();
+    Field * getStartField();
+    Figure * getFigure(Player *player);
     ~Map();
 
 
@@ -19,7 +23,7 @@ private:
     //QApplication a(argc, argv);
     QWidget * w;
     QGridLayout * layout;
-    int player;
+   // int player;
     Field * start;
     //methods
     QGridLayout* createGrid();

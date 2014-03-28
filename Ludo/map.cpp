@@ -1,4 +1,5 @@
 #include "map.h"
+#include "iostream"
 
 Map::Map(QObject *parent):QObject(parent)
 {
@@ -16,7 +17,18 @@ QGridLayout* Map::createGrid(){
 }
 
 
+Field * Map::getStartField(){
+    std::cout<<"map::  "<<start->text.toStdString()<<std::endl;
+    return start;
+}
 
+Figure * Map::getFigure(Player *player){
+    Figure * figure= new Figure(w, player);
+    figure->setPixmap(QPixmap(QString::fromUtf8(":/image/figure")));
+    figure->setFixedSize(25,25);
+    figure->setScaledContents(true);
+    layout->addWidget(figure,1,1);
+}
 
 void Map::createField(Field * field,int x, int y){
 
@@ -39,12 +51,15 @@ void Map::createSpecialPoints(QGridLayout * grid){
  QGridLayout * Map::createMap(){
      int x=1,y=0;
      start= new Field(w);
+     start->text="start";
+std::cout<<start->text.toStdString()<<std::endl;
      Field * field=start;
 
-     //createField(field,0,0);
+     createField(field,x,y);
      for(int i=1;i<=41;i++){
          field->setNext(new Field(w));
          field=field->getNext();
+         field->text="x,y";
          if(i<11)
              x++;
          else if(i>=11 && i<21)
