@@ -51,7 +51,7 @@ void Map::createSpecialPoints(QGridLayout * grid){
              y++;
          else if(i>=21 && i<31)
              x--;
-         else if(i>=31 && i<=41)
+         else if(i>=31 && i<=40)
              y--;
         createField(field,x,y);
      }
