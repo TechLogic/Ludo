@@ -9,8 +9,8 @@ class Game : public QObject
 {
     Q_OBJECT
 public:
-    Game(QObject *parent,Player *player);
-    void start();
+    Game(QObject *parent);
+    int start(int argc, char *argv[]);
     void stop();
 
     public slots:  void throwDice();
@@ -20,7 +20,8 @@ public:
 private:
     Player *players;
     Player *active;
-    Map map;
+    Map* map;
+    QGridLayout* layout;
     Dice dice;
     int DiceValue;
     int rollDice();

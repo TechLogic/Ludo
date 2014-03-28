@@ -5,6 +5,16 @@ Field::Field(QWidget *parent):QLabel(parent),next(NULL){
     next=NULL;
 }
 
+int Field::getX(){
+    return x;
+}
+
+
+int Field::getY(){
+    return y;
+}
+
+
 Field* Field::getNext(){
     return next;
 }

@@ -15,9 +15,11 @@ public:
     bool move(int value);
 
     void setPosition(QWidget *field);
+    QWidget* getPositition();
 
 
 signals: void clicked(Figure*); void enter(Figure*); void leave(Figure*);
+
 
 protected:
    void mousePressEvent(QMouseEvent *ev);

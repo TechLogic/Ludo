@@ -1,6 +1,7 @@
 #include "game.h"
+#include <QApplication>
 
-Game::Game(QObject *parent, Player *player):QObject(parent),players(player),active(player),map(new Map(parent)),dice(new Dice(parent)){
+Game::Game(QObject *parent):QObject(parent),map(NULL),dice(new Dice(parent)){
 }
 
 
@@ -11,8 +12,17 @@ int Game::rollDice(){
 }
 
 bool Game::move(Figure *figure){
+
     if(active->hasFigure(figure)){
-       return figure->move(DiceValue);
+       bool result= figure->move(DiceValue);
+       if(result = true){
+       Field* newField = (Field*)(figure->getPositition());
+       int newX = newField->getX();
+       int newY = newField->getY();
+        layout->removeWidget(figure);
+        layout->addWidget(figure,newX,newY);
+       }
+        return result;
     }else{
         return false;
     }
@@ -20,7 +30,28 @@ bool Game::move(Figure *figure){
 }
 
 
-void Game::start(){
+int Game::start(int argc, char *argv[]){
+    QObject parent;
+    QApplication a(argc,argv);
+    QWidget w;
+    map = new Map(this->parent());
+    w.setMinimumSize(500,500);
+    w.setWindowTitle(
+    QApplication::translate("Ludo", "Ludo"));
+    layout=map->createMap();
+    Player pl(&parent);
+    Figure * f=map->getFigure(&pl);
+    Field * fi=map->getStartField();
+
+    fi->setFigure(f);
+    w.setLayout(layout);
+    w.show();
+    f->setPosition(fi);
+
+    DiceValue=5;
+    move(f);
+
+    return a.exec();
 }
 
 

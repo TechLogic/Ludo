@@ -48,6 +48,7 @@ void Map::createSpecialPoints(QGridLayout * grid){
  Map::~Map(){delete w;
             }
 
+
  QGridLayout * Map::createMap(){
      int x=1,y=0;
      start= new Field(w);

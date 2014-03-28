@@ -28,6 +28,9 @@ bool Figure::eventFilter(QObject *obj, QEvent *event){
 
 }
 
+QWidget* Figure::getPositition(){
+    return currentPos;
+}
 
 bool Figure::move(int value){
 
