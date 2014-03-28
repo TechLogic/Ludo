@@ -18,6 +18,8 @@ public:
     QString text;
     int getX();
     int getY();
+    void setX(int x);
+    void setY(int y);
 private:
     QObject* figure;
     Field* next;

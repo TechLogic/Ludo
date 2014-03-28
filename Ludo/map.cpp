@@ -28,6 +28,7 @@ Figure * Map::getFigure(Player *player){
     figure->setFixedSize(25,25);
     figure->setScaledContents(true);
     layout->addWidget(figure,1,1);
+    return figure;
 }
 
 void Map::createField(Field * field,int x, int y){
@@ -35,6 +36,8 @@ void Map::createField(Field * field,int x, int y){
     field->setPixmap(QPixmap(QString::fromUtf8(":/image/field")));
     field->setFixedSize(25,25);
     field->setScaledContents(true);
+    field->setX(x);
+    field->setY(y);
     layout->addWidget(field,x,y);
 }
 

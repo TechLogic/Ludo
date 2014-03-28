@@ -16,6 +16,7 @@ public:
 
     void setPosition(QWidget *field);
     QWidget* getPositition();
+    //void setPlayer();
 
 
 signals: void clicked(Figure*); void enter(Figure*); void leave(Figure*);
@@ -25,7 +26,7 @@ protected:
    void mousePressEvent(QMouseEvent *ev);
    bool eventFilter(QObject *obj, QEvent *event);
 private:
-    const QObject* player;
+    QObject* player;
     QWidget* currentPos;
 };
 

@@ -50,7 +50,7 @@ bool Figure::move(int value){
         }
     }
 
-        ((Field*)currentPos)->removeFigure();
+       ((Field*)currentPos)->removeFigure();
         field->setFigure(this);
         currentPos = field;
     return true;

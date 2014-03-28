@@ -6,8 +6,13 @@ class ComputerPlayer : public Player
 {
 Q_OBJECT
 public:
-    ComputerPlayer(QObject *parent);
+    ComputerPlayer(QObject *parent,int figuresCount);
     void play();
+private:
+    int figureBehind(Figure * fig);
+    int getFieldsToFin(Figure *fig);
+    bool isStartFieldFomOther(Field *f);
+
 };
 
 #endif // COMPUTERPLAYER_H
