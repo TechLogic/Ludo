@@ -2,9 +2,32 @@
 #include <QObject>
 #include"field.h"
 #include "player.h"
+#include <QEvent>
 Figure::Figure(QWidget *parent, QObject *player): QLabel(parent),player(player){
 
 }
+
+
+void Figure::mousePressEvent(QMouseEvent *ev){
+    emit clicked(this);
+  }
+
+bool Figure::eventFilter(QObject *obj, QEvent *event){
+
+    if(obj == this){
+        if( event->type()==QEvent::Enter){
+            emit enter(this);
+            return true;
+        }
+
+        if(event->type()== QEvent::Leave){
+            emit leave(this);
+            return true;
+        }
+    }
+
+}
+
 
 bool Figure::move(int value){
 

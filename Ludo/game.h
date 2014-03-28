@@ -13,6 +13,10 @@ public:
     void start();
     void stop();
 
+    public slots:  void throwDice();
+                   void showMove(Figure* figure);
+                   void moveFigure(Figure* figure);
+
 private:
     Player *players;
     Player *active;
@@ -20,7 +24,7 @@ private:
     Dice dice;
     int DiceValue;
     int rollDice();
-    bool moveFigure(Figure *figure);
+    bool move(Figure *figure);
 };
 
 #endif // GAME_H
