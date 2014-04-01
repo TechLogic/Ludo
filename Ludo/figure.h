@@ -17,6 +17,7 @@ public:
     void setPosition(QWidget *field);
     QWidget* getPositition();
     //void setPlayer();
+    QObject* getPlayer();
 
 
 signals: void clicked(Figure*); void enter(Figure*); void leave(Figure*);
