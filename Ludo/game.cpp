@@ -37,7 +37,7 @@ int Game::start(int argc, char *argv[]){
     QApplication a(argc,argv);
     QWidget w;
     QPushButton button("throw dice");
-    QObject::connect(&button,SIGNAL(clicked()),this,SLOT(Game::throwDice()));
+    QObject::connect(&button,SIGNAL(clicked()),this,SLOT(throwDice()));
 
     map = new Map(this->parent());
     w.setMinimumSize(500,500);
