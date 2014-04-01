@@ -26,6 +26,7 @@ private:
     int DiceValue;
     int rollDice();
     bool move(Figure *figure);
+    void connectFigures();
 };
 
 #endif // GAME_H

@@ -32,6 +32,7 @@ bool Game::move(Figure *figure){
 }
 
 
+
 int Game::start(int argc, char *argv[]){
     QObject parent;
     QApplication a(argc,argv);

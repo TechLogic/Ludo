@@ -17,6 +17,7 @@ QGridLayout* Map::createGrid(){
 }
 
 
+
 Field * Map::getStartField(){
     std::cout<<"map::  "<<start->text.toStdString()<<std::endl;
     return start;
@@ -65,13 +66,13 @@ std::cout<<start->text.toStdString()<<std::endl;
          field=field->getNext();
          field->text="x,y";
          if(i<11)
-             x++;
-         else if(i>=11 && i<21)
              y++;
+         else if(i>=11 && i<21)
+             x++;
          else if(i>=21 && i<31)
-             x--;
-         else if(i>=31 && i<=40)
              y--;
+         else if(i>=31 && i<=40)
+             x--;
         createField(field,x,y);
      }
 
