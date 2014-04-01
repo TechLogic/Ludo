@@ -13,6 +13,9 @@ public:
     int getValue();
 private:
     int value;
+    std::mt19937 * generator;
+    std::uniform_int_distribution<int> * distribution;
+    //auto dice();
 };
 
 

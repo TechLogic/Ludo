@@ -39,6 +39,7 @@ int Game::start(int argc, char *argv[]){
     QPushButton button("throw dice");
     QObject::connect(&button,SIGNAL(clicked()),this,SLOT(throwDice()));
 
+
     map = new Map(this->parent());
     w.setMinimumSize(500,500);
     w.setWindowTitle(
@@ -51,8 +52,9 @@ int Game::start(int argc, char *argv[]){
 
     pl.setEnd(new Field(&w));
     pl.setHome(new Field(&w));
-Figure * f=map->getFigure(&pl);
-pl.setFigures(f);
+    Figure * f=map->getFigure(&pl);
+    QObject::connect(f,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
+    pl.setFigures(f);
     Field * fi=map->getStartField();
 
 
@@ -66,7 +68,7 @@ pl.setFigures(f);
 
    // DiceValue=5;
     active=&pl;
-    bool kp=move(f);
+   // bool kp=move(f);
 
     return a.exec();
 }
