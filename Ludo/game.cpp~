@@ -53,9 +53,15 @@ int Game::start(int argc, char *argv[]){
 
     pl.setEnd(new Field(&w));
     pl.setHome(new Field(&w));
+<<<<<<< HEAD
+Figure * f=map->getFigure(&pl);
+ QObject::connect(f,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
+pl.setFigures(f);
+=======
     Figure * f=map->getFigure(&pl);
     QObject::connect(f,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
     pl.setFigures(f);
+>>>>>>> aea66e96db42f5022f790b44340d2fb776b66628
     Field * fi=map->getStartField();
 
 
