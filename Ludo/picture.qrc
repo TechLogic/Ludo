@@ -2,6 +2,8 @@
     <qresource prefix="/image">
         <file alias="field">normalField.jpg</file>
         <file alias="figure">figure.png</file>
+        <file alias="red">redField.png</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
+    <qresource prefix="/new/prefix2"/>
 </RCC>

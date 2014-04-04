@@ -18,6 +18,7 @@ public:
      void setFigures(Figure *figures);
      bool hasFigure(Figure *figure);
 
+
 private:
      Figure* figures;
      Field* start;

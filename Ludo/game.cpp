@@ -52,20 +52,23 @@ int Game::start(int argc, char *argv[]){
 
 
     pl.setEnd(new Field(&w));
-    pl.setHome(new Field(&w));
-    Figure * f=map->getFigure(&pl);
-    QObject::connect(f,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
-    pl.setFigures(f);
-    Field * fi=map->getStartField();
+    //pl.setHome(new Field(&w));
+    //Figure * f=map->getFigure(&pl);
+    int i=0;
+
+   // pl.setFigures(f);
+    //Field * fi=map->getStartField();
 
 
-    fi->setFigure(f);
+   // fi->setFigure(f);
 
     w.setLayout(layout);
     w.show();
+    Figure **figures=map->createStartHouse(&pl);
+    for(i=0;i<2;i++)
+        QObject::connect(figures[i],SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
 
-
-    f->setPosition(fi);
+    //f->setPosition(fi);
 
    // DiceValue=5;
     active=&pl;
@@ -95,5 +98,7 @@ void Game::throwDice(){
     if(DiceValue %6 == 0){
         DiceValue = rollDice();
     }
+
+    DiceValue=6;
     std::cout<<DiceValue<<std::endl;
 }

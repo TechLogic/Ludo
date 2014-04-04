@@ -28,7 +28,7 @@ Figure * Map::getFigure(Player *player){
     figure->setPixmap(QPixmap(QString::fromUtf8(":/image/figure")));
     figure->setFixedSize(25,25);
     figure->setScaledContents(true);
-    layout->addWidget(figure,1,1);
+
     return figure;
 }
 
@@ -40,11 +40,40 @@ void Map::createField(Field * field,int x, int y){
     field->setX(x);
     field->setY(y);
     layout->addWidget(field,x,y);
-}
-
-void Map::createHouse(QGridLayout * grid){
 
 }
+
+Figure **Map::createStartHouse(Player * pl){
+    Field * house[4];
+    Field *startPoint=new Field(w);
+    Figure * figures[4];
+    int x=0,y=2;
+    for(int i=0;i<4;i++){
+        house[i]=new Field(w);
+
+        if(i==2){
+            x--;
+            y++;
+        }else
+            x++;
+        createField(house[i],y,x);
+        house[i]->setPixmap(QPixmap(QString::fromUtf8(":/image/red")));
+        figures[i] =getFigure(pl);
+        house[i]->setFigure(figures[i]);
+        figures[i]->setPosition(house[i]);
+        layout->addWidget(figures[i],y,x);
+
+    }
+    createField(startPoint,1,0);
+    startPoint->setPixmap(QPixmap(QString::fromUtf8(":/image/red")));
+    house[4]->setNext(startPoint);
+    pl->setHome(house[0]);
+    pl->setFigures(figures[0]);
+    return figures;
+
+
+}
+
 
 void Map::createSpecialPoints(QGridLayout * grid){
 
