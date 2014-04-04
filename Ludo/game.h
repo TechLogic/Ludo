@@ -27,6 +27,7 @@ private:
     int rollDice();
     bool move(Figure *figure);
     void connectFigures();
+    bool FigureInHouse(Figure* figure);
 };
 
 #endif // GAME_H

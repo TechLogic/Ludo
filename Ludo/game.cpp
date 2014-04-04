@@ -84,19 +84,53 @@ void Game::showMove(Figure *figure){
 }
 
 
+bool Game::FigureInHouse(Figure *figure){
+    return false;
+    Player* player=(Player*)figure->getPlayer();
+    Field* startHouse = player->getHome();
+    while(startHouse != NULL){
+        if (startHouse->containsFigure() == figure){
+           return true;
+        }else{
+            startHouse++;
+        }
+    }
+    return false;
+}
+
+
 void Game::moveFigure(Figure *figure){
 
+
+
+    if(FigureInHouse(figure)){
+
+       // if(((Player*)figure->getPlayer())->getHome()->getNext()->containsFigure() == NULL){
+        //       return;
+       // }
+
+        if(DiceValue ==6){
+            DiceValue=1;
+            moveFigure(figure);
+        }else{
+            return;
+       }
+    }else{
     bool result = move(figure);
     if(result == true){
         DiceValue = 0;
         active = active++;
+        if(active == NULL){
+            active = players;
+            }
+        }
     }
 }
 
 void Game::throwDice(){
 
     if(DiceValue %6 == 0){
-        DiceValue = rollDice();
+        DiceValue += rollDice();
     }
 
     DiceValue=6;

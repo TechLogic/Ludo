@@ -32,6 +32,10 @@ QWidget* Figure::getPositition(){
     return currentPos;
 }
 
+QObject* Figure::getPlayer(){
+    return player;
+}
+
 bool Figure::move(int value){
 
     Field *field = (Field*) currentPos;
@@ -43,7 +47,7 @@ bool Figure::move(int value){
             return false;
         }
 
-        if(field->getNext() != end){
+        if(field != end){
             field = field->getNext();
         }else{
             field = p->getHome();
