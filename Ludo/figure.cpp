@@ -3,6 +3,7 @@
 #include"field.h"
 #include "player.h"
 #include <QEvent>
+#include<iostream>
 Figure::Figure(QWidget *parent, QObject *player): QLabel(parent),player(player){
 
 }
@@ -13,8 +14,7 @@ void Figure::mousePressEvent(QMouseEvent *ev){
   }
 
 bool Figure::eventFilter(QObject *obj, QEvent *event){
-
-    if(obj == this){
+     if(obj == this){
         if( event->type()==QEvent::Enter){
             emit enter(this);
             return true;

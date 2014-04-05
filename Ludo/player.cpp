@@ -7,6 +7,10 @@ Player::Player(QObject *parent,int figuresCount):QObject(parent),
 
 }
 
+Figure* Player::getFigures(){
+    return figures;
+}
+
 Field* Player::getEnd(){
     return end;
 }

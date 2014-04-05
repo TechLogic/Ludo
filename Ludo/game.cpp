@@ -55,6 +55,7 @@ int Game::start(int argc, char *argv[]){
     pl.setHome(new Field(&w));
     Figure * f=map->getFigure(&pl);
     QObject::connect(f,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
+     QObject::connect(f,SIGNAL(enter(Figure*)),this,SLOT(showMove(Figure*)));
     pl.setFigures(f);
     Field * fi=map->getStartField();
 
@@ -77,11 +78,11 @@ int Game::start(int argc, char *argv[]){
 
 
 void Game::showMove(Figure *figure){
-
+    std::cout<<"Test"<<std::endl;
 }
 
 
-bool Game::FigureInHouse(Figure *figure){
+bool Game::FigureInEndHouse(Figure *figure){
     return false;
     Player* player=(Player*)figure->getPlayer();
     Field* startHouse = player->getHome();
@@ -100,7 +101,7 @@ void Game::moveFigure(Figure *figure){
 
 
 
-    if(FigureInHouse(figure)){
+    if(FigureInEndHouse(figure)){
 
        // if(((Player*)figure->getPlayer())->getHome()->getNext()->containsFigure() == NULL){
         //       return;
@@ -124,10 +125,54 @@ void Game::moveFigure(Figure *figure){
     }
 }
 
+bool Game::FigureInStartHouse(Figure *figure){
+
+    return false;
+    Player* player=(Player*)figure->getPlayer();
+    Field* startHouse = player->getHome();
+    while(startHouse != NULL){
+        if (startHouse->containsFigure() == figure){
+           return true;
+        }else{
+            startHouse++;
+        }
+    }
+    return false;
+}
+
+
+
+bool Game::hasThreeThrows(){
+
+    Figure *figure =active->getFigures();
+
+    while(figure != NULL){
+        if(FigureInEndHouse(figure)||FigureInStartHouse(figure)){
+            figure = figure++;
+        }else{
+            return false;
+        }
+    }
+
+    return true;
+
+
+}
+
 void Game::throwDice(){
 
+
+
     if(DiceValue %6 == 0){
+
+
         DiceValue += rollDice();
+    }else{
+        if(hasThreeThrows() && ThrowCount >3){
+            DiceValue = 0;
+            ThrowCount++;
+        }
+
     }
     std::cout<<DiceValue<<std::endl;
 }

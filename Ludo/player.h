@@ -17,6 +17,7 @@ public:
      void setHome(Field*field);
      void setFigures(Figure *figures);
      bool hasFigure(Figure *figure);
+     Figure* getFigures();
 
 private:
      Figure* figures;
