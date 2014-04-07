@@ -74,8 +74,7 @@ void Map::createField(Field * field,int x, int y){
 
 Figure **Map::createStartHouse(Player * pl){
     Field * house[4];
-    for(int i=0;i<4;i++)
-        house[i]=NULL;
+    
     Figure * figures[4];
      int  nr= pl->getNr();
     int x=startHousePoint[nr-1][0],y=startHousePoint[nr-1][1];

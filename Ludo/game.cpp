@@ -49,27 +49,28 @@ int Game::start(int argc, char *argv[]){
     QApplication::translate("Ludo", "Ludo"));
     layout=map->createMap();
     layout->addWidget(&button,15,15);
-    /*Player * pl[2];
-    pl[0]=new Player(&parent,4,1);
-    pl[1]=new Player(&parent,4,2);*/
-    //players=new Player[2];
-    Player pl(&parent,4,1);
-//Figure **figures;
+
+    players[0]=new Player(&parent,4,1);
+    players[1]=new Player(&parent,4,2);
+
 
     w.setLayout(layout);
     w.show();
     int i=0;
-    Figure **figures=map->createStartHouse(&pl);
-    for(i=0;i<4;i++)
-        QObject::connect(figures[i],SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
-    map->createEndHouseOfPlayer(&pl);
-    active=&pl;
+    int b=0;
    // active=pli[0];
-Player plo(&parent,4,2);
-Figure **figures1=map->createStartHouse(&plo);
-for(i=0;i<4;i++)
-    QObject::connect(figures1[i],SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
-map->createEndHouseOfPlayer(&plo);
+    //for(int a=0;a<2;a++){
+    //Player * p=&player[0];
+    for(int a=0;a<2;a++){
+    Player* p=new Player(&parent,4,1);
+        Figure **figures1=map->createStartHouse(p);
+        for(i=0;i<4;i++)
+             QObject::connect(figures1[i],SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
+        map->createEndHouseOfPlayer(p);
+        players[a]=player;
+   // }
+}
+    active=players[0];
     return a.exec();
 }
 
