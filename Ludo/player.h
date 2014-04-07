@@ -19,11 +19,18 @@ public:
      void setFigures(Figure **figures);
      void setStart(Field *field);
      bool hasFigure(Figure *figure);
+      Figure **getFigures();
      int getNr();
 
 
 private:
+     //Figure** figures;
+
+
+
+protected:
      Figure** figures;
+
      Field* start;
      Field* end;
      int figuresCount;

@@ -11,6 +11,11 @@ Player::Player(QObject *parent, int figuresCount, int nr):QObject(parent),
      delete figures;
  }
 
+Figure** Player::getFigures(){
+    return figures;
+}
+
+
 Field* Player::getEnd(){
     return end;
 }

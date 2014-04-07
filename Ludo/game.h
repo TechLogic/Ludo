@@ -30,7 +30,14 @@ private:
     int rollDice();
     bool move(Figure *figure);
     void connectFigures();
+
     bool FigureInHouse(Figure* figure);
+
+
+    bool FigureInEndHouse(Figure* figure);
+    bool FigureInStartHouse(Figure* figure);
+    bool hasThreeThrows();
+    int ThrowCount;
 
 };
 

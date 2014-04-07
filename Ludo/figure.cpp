@@ -3,6 +3,7 @@
 #include"field.h"
 #include "player.h"
 #include <QEvent>
+#include<iostream>
 Figure::Figure(QWidget *parent, QObject *player): QLabel(parent),player(player){
 
 }
@@ -13,8 +14,7 @@ void Figure::mousePressEvent(QMouseEvent *ev){
   }
 
 bool Figure::eventFilter(QObject *obj, QEvent *event){
-
-    if(obj == this){
+     if(obj == this){
         if( event->type()==QEvent::Enter){
             emit enter(this);
             return true;
@@ -36,15 +36,15 @@ QObject* Figure::getPlayer(){
     return player;
 }
 
-bool Figure::move(int value){
 
+Field* Figure::showMove(int value){
     Field *field = (Field*) currentPos;
     Player *p = (Player*)player;
     Field *end =p->getEnd();
     for(int i = value;i>0;i--){
 
         if(field->getNext() == NULL){
-            return false;
+            return NULL;
         }
 
         if(field != end){
@@ -53,11 +53,20 @@ bool Figure::move(int value){
             field = p->getHome();
         }
     }
+    return field;
 
+}
+
+bool Figure::move(int value){
+       Field *field = showMove(value);
+       if(field!= NULL){
        ((Field*)currentPos)->removeFigure();
         field->setFigure(this);
         currentPos = field;
-    return true;
+        return true;
+}else{
+        return false;
+       }
 }
 
 void Figure::setPosition(QWidget *field){
