@@ -19,7 +19,7 @@ public:
      bool hasFigure(Figure *figure);
      Figure* getFigures();
 
-private:
+protected:
      Figure* figures;
      Field* start;
      Field* end;

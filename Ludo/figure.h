@@ -13,6 +13,7 @@ class Figure : public QLabel
 public:
     Figure(QWidget *parent,QObject* player);
     bool move(int value);
+    Field* showMove(int value);
 
     void setPosition(QWidget *field);
     QWidget* getPositition();
