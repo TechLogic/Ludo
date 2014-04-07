@@ -7,4 +7,7 @@ int main(int argc, char *argv[])
     srand(time(NULL));
     Game* game = new Game(&parent);
     game->start(argc,argv);
+    //delete game;
+
+
 }

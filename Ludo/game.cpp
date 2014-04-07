@@ -36,8 +36,10 @@ bool Game::move(Figure *figure){
 int Game::start(int argc, char *argv[]){
     QObject parent;
     QApplication a(argc,argv);
+
     QWidget w;
-    QPushButton button("throw dice");
+    QPushButton button("6");
+    button.setText("6");
     QObject::connect(&button,SIGNAL(clicked()),this,SLOT(throwDice()));
 
 
@@ -47,32 +49,21 @@ int Game::start(int argc, char *argv[]){
     QApplication::translate("Ludo", "Ludo"));
     layout=map->createMap();
     layout->addWidget(&button,12,12);
-    Player pl(&parent,1);
+    Player pl(&parent,4);
 
-
-
-    pl.setEnd(new Field(&w));
-    //pl.setHome(new Field(&w));
-    //Figure * f=map->getFigure(&pl);
     int i=0;
 
-   // pl.setFigures(f);
-    //Field * fi=map->getStartField();
 
-
-   // fi->setFigure(f);
 
     w.setLayout(layout);
     w.show();
-    Figure **figures=map->createStartHouse(&pl);
-    for(i=0;i<2;i++)
+   Figure **figures=map->createStartHouse(&pl);
+    for(i=0;i<4;i++)
         QObject::connect(figures[i],SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
+     map->createEndHouseOfPlayer(&pl);
 
-    //f->setPosition(fi);
-
-   // DiceValue=5;
     active=&pl;
-   // bool kp=move(f);
+
 
     return a.exec();
 }
@@ -133,6 +124,5 @@ void Game::throwDice(){
         DiceValue += rollDice();
     }
 
-    DiceValue=6;
     std::cout<<DiceValue<<std::endl;
 }

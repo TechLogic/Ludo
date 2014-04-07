@@ -2,10 +2,14 @@
 #include "player.h"
 
 Player::Player(QObject *parent,int figuresCount):QObject(parent),
-    figuresCount(figuresCount),end(NULL),home(NULL),start(NULL),figures(NULL)
+    figuresCount(figuresCount),end(NULL),home(NULL),start(NULL)//,figures(NULL)
 {
 
 }
+
+ Player::~Player(){
+     delete figures;
+ }
 
 Field* Player::getEnd(){
     return end;
@@ -22,8 +26,14 @@ void Player::setHome(Field*field){
     this->home=field;
 }
 
-void Player::setFigures(Figure *figures){
-    this->figures=figures;
+void Player::setStart(Field *field){
+    this->start=field;
+}
+
+void Player::setFigures(Figure **figures ){
+    for(int i=0;i<4;i++)
+        this->figures[i]=figures[i];
+    //this->figures=figures;
 }
 
 bool Player::hasWon(){
@@ -48,16 +58,19 @@ void Player::setFigureToStart(){
 
 bool Player::hasFigure(Figure *figure){
 
-    Figure* f = figures;
-    if( figuresCount==1 &&f == figure)
+   // Figure* f [4];
+    //f=figures;
+    if( figuresCount==1 && figures[0] == figure)
         return true;
-
-        Figure* end = f +figuresCount-1;
-        while(f < end){
-        if(f == figure){
+int i=0;
+       // Figure* end = f+figuresCount-1;
+       // while(f < end){
+        for(i=0;i<4;i++){
+            Figure * fi=figures[i];
+            if( fi== figure){
            return true;
        }
-       f++;
+      // f++;
     }
    return false;
 }

@@ -5,6 +5,9 @@
 #include"field.h"
 #include "figure.h"
 #include "player.h"
+
+using namespace std;
+
 class Map : public QObject
 {
     Q_OBJECT
@@ -28,8 +31,10 @@ private:
     //variablen
     QWidget * w;
     QGridLayout * layout;
+    Field * startPoint [4];
+    Field * endPoint [4];
     Field * start;
-    //methods
+
     QGridLayout* createGrid();
     Field * drawColumn(QGridLayout * grid, int x, int y);
     void drawRow(QGridLayout* grid ,int x, int y, int lenght);

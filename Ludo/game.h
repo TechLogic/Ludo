@@ -4,6 +4,7 @@
 #include "map.h"
 #include "dice.h"
 #include "player.h"
+#include <QPushButton>
 
 class Game : public QObject
 {

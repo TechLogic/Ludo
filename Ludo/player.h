@@ -9,18 +9,20 @@ class Player : public QObject
     Q_OBJECT
 public:
     Player(QObject *parent,int figuresCount);
+     ~Player();
     void setFigureToStart();
     bool hasWon();
      Field* getEnd();
      Field *getHome();
      void setEnd(Field *field);
      void setHome(Field*field);
-     void setFigures(Figure *figures);
+     void setFigures(Figure **figures);
+     void setStart(Field *field);
      bool hasFigure(Figure *figure);
 
 
 private:
-     Figure* figures;
+     Figure** figures;
      Field* start;
      Field* end;
      int figuresCount;
