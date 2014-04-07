@@ -8,7 +8,7 @@ class Player : public QObject
 {
     Q_OBJECT
 public:
-    Player(QObject *parent,int figuresCount);
+    Player(QObject *parent,int figuresCount,int nr);
      ~Player();
     void setFigureToStart();
     bool hasWon();
@@ -19,6 +19,7 @@ public:
      void setFigures(Figure **figures);
      void setStart(Field *field);
      bool hasFigure(Figure *figure);
+     int getNr();
 
 
 private:
@@ -27,6 +28,7 @@ private:
      Field* end;
      int figuresCount;
      Field* home;
+     int nr;
 
 
 };

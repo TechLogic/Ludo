@@ -1,8 +1,14 @@
 <RCC>
     <qresource prefix="/image">
         <file alias="field">normalField.jpg</file>
-        <file alias="figure">figure.png</file>
-        <file alias="red">redField.png</file>
+        <file alias="field1">field1.png</file>
+        <file alias="field2">field2.png</file>
+        <file alias="field3">field3.png</file>
+        <file alias="field4">field4.png</file>
+        <file alias="figure1">figure1.png</file>
+        <file alias="figure2">figure2.png</file>
+        <file alias="figure3">figure3.png</file>
+        <file alias="figure4">figure4.png</file>
     </qresource>
     <qresource prefix="/new/prefix1"/>
     <qresource prefix="/new/prefix2"/>

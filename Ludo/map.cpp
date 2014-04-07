@@ -2,10 +2,11 @@
 #include "iostream"
 #include <QVector>
 
-Map::Map(QObject *parent):QObject(parent)
+Map::Map(QObject *parent):QObject(parent),startHousePoint({{12,1},{12,10},{0,11},{0,1}})
 {
     w= new QWidget();
     layout=createGrid();
+   // startHousePoint=
 
 }
 
@@ -19,11 +20,13 @@ QGridLayout* Map::createGrid(){
 }
 
 void Map::createEndHouseOfPlayer(Player *player){
-    int x=9,y=2;
-    Field *field=endPoint[0];
+    int nr=player->getNr();
+    Field *field=endPoint[nr-1];
+    int x=field->getY(),y=field->getX()+1;
+
     player->setEnd(field);
 
-    field->setPixmap(QPixmap(QString::fromUtf8(":/image/red")));
+    field->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
     for(int i=0;i<4;i++){
 
         if(i==0){
@@ -37,7 +40,7 @@ void Map::createEndHouseOfPlayer(Player *player){
         }
 
         createField(field,y,x);
-        field->setPixmap(QPixmap(QString::fromUtf8(":/image/red")));
+        field->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
         y++;
 
     }
@@ -50,7 +53,8 @@ Field * Map::getStartField(){
 
  Figure * Map::getFigure(Player *player){
     Figure * figure= new Figure(w, player);
-    figure->setPixmap(QPixmap(QString::fromUtf8(":/image/figure")));
+    int nr=player->getNr();
+    figure->setPixmap(QPixmap(QString::fromUtf8(":/image/figure%1").arg(QString::number(nr))));
     figure->setFixedSize(25,25);
     figure->setScaledContents(true);
 
@@ -72,7 +76,8 @@ Figure **Map::createStartHouse(Player * pl){
     Field * house[4];
 
     Figure * figures[4];
-    int x=0,y=2;
+     int  nr= pl->getNr();
+    int x=startHousePoint[nr-1][0],y=startHousePoint[nr-1][1];
     for(int i=0;i<4;i++){
         house[i]=new Field(w);
 
@@ -81,16 +86,19 @@ Figure **Map::createStartHouse(Player * pl){
             y++;
         }else
             x++;
-        Figure *fi=getFigure(pl);
+        //figures[i]=getFigure(pl);
         createField(house[i],y,x);
-        house[i]->setPixmap(QPixmap(QString::fromUtf8(":/image/red")));
+        //char []text=":/image/field"+pl->getNr();
+
+        //st.append(pl->getNr());
+        house[i]->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
         figures[i]=this->getFigure(pl);
         house[i]->setFigure(figures[i]);
         figures[i]->setPosition(house[i]);
         house[i]->setNext(startPoint[0]);
         layout->addWidget(figures[i],y,x);
     }
-    startPoint[0]->setPixmap(QPixmap(QString::fromUtf8(":/image/red")));
+    startPoint[pl->getNr()-1]->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
 
     pl->setStart(house[0]);
     pl->setFigures(figures);
@@ -108,7 +116,7 @@ void Map::createSpecialPoints(QGridLayout * grid){
 
 
  QGridLayout * Map::createMap(){
-     int x=1,y=0;
+     int x=1,y=2;
      int currentStartPointCount=0;
      int currentEndPointCount=0;
      start= new Field(w);

@@ -34,6 +34,7 @@ private:
     Field * startPoint [4];
     Field * endPoint [4];
     Field * start;
+    int startHousePoint[4][2];
 
     QGridLayout* createGrid();
     Field * drawColumn(QGridLayout * grid, int x, int y);

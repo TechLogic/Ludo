@@ -1,6 +1,6 @@
 #include "computerplayer.h"
 
-ComputerPlayer::ComputerPlayer(QObject *parent,int figuresCount): Player(parent,figuresCount)
+ComputerPlayer::ComputerPlayer(QObject *parent,int figuresCount,int nr): Player(parent,figuresCount,nr)
 {
 
 }

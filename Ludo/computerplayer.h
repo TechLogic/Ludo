@@ -6,7 +6,7 @@ class ComputerPlayer : public Player
 {
 Q_OBJECT
 public:
-    ComputerPlayer(QObject *parent,int figuresCount);
+    ComputerPlayer(QObject *parent, int figuresCount, int nr);
     void play();
 private:
     int figureBehind(Figure * fig);

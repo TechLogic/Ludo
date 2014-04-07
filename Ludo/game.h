@@ -13,13 +13,15 @@ public:
     Game(QObject *parent);
     int start(int argc, char *argv[]);
     void stop();
+    ~Game();
 
     public slots:  void throwDice();
                    void showMove(Figure* figure);
                    void moveFigure(Figure* figure);
 
 private:
-    Player *players;
+    Player *players [4];
+    Player * player;
     Player *active;
     Map* map;
     QGridLayout* layout;
@@ -29,6 +31,7 @@ private:
     bool move(Figure *figure);
     void connectFigures();
     bool FigureInHouse(Figure* figure);
+
 };
 
 #endif // GAME_H

@@ -1,8 +1,8 @@
 #include <QObject>
 #include "player.h"
 
-Player::Player(QObject *parent,int figuresCount):QObject(parent),
-    figuresCount(figuresCount),end(NULL),home(NULL),start(NULL)//,figures(NULL)
+Player::Player(QObject *parent, int figuresCount, int nr):QObject(parent),
+    figuresCount(figuresCount),end(NULL),home(NULL),start(NULL),nr(nr)//,figures(NULL)
 {
 
 }
@@ -13,6 +13,9 @@ Player::Player(QObject *parent,int figuresCount):QObject(parent),
 
 Field* Player::getEnd(){
     return end;
+}
+int Player::getNr(){
+    return nr;
 }
 
 Field* Player::getHome(){
@@ -33,7 +36,7 @@ void Player::setStart(Field *field){
 void Player::setFigures(Figure **figures ){
     for(int i=0;i<4;i++)
         this->figures[i]=figures[i];
-    //this->figures=figures;
+   // this->figures=figures;
 }
 
 bool Player::hasWon(){
