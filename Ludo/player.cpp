@@ -2,13 +2,13 @@
 #include "player.h"
 
 Player::Player(QObject *parent, int figuresCount, int nr):QObject(parent),
-    figuresCount(figuresCount),end(NULL),home(NULL),start(NULL),nr(nr)//,figures(NULL)
+    figuresCount(figuresCount),end(NULL),home(NULL),nr(nr)//,figures(NULL)
 {
 
 }
 
  Player::~Player(){
-     delete &figures;
+     //figures=NULL;
  }
 
 QList<Figure *> Player::getFigures(){
@@ -34,8 +34,9 @@ void Player::setHome(Field*field){
     this->home=field;
 }
 
-void Player::setStart(Field *field){
-    this->start=field;
+void Player::setStart(QList<Field *>field){
+    foreach(Field * fi,field)
+        this->start<<fi;
 }
 
 void Player::setFigures(QList<Figure *> figures ){

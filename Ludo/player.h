@@ -17,7 +17,7 @@ public:
      void setEnd(Field *field);
      void setHome(Field*field);
      void setFigures(QList<Figure *>figures);
-     void setStart(Field *field);
+     void setStart(QList<Field *> field);
      bool hasFigure(Figure *figure);
       QList<Figure *> getFigures();
      int getNr();
@@ -31,7 +31,7 @@ private:
 protected:
      QList<Figure*> figures;
 
-     Field* start;
+     QList<Field*> start;
      Field* end;
      int figuresCount;
      Field* home;

@@ -3,7 +3,8 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include <iostream>
-Game::Game(QObject *parent):QObject(parent),map(NULL),dice(new Dice(parent)),DiceValue(0)//,players(){
+#include "computerplayer.h"
+Game::Game(QObject *parent):QObject(parent),map(NULL),dice(new Dice(parent)),DiceValue(0),active(0)//,players(){
 {}
 
 
@@ -39,7 +40,7 @@ int Game::start(int argc, char *argv[]){
     QApplication a(argc,argv);
 
     QWidget w;
-    diceButton= new QPushButton ("6");
+    diceButton= new QPushButton (&w);
     diceButton->setText("6");
     QObject::connect(diceButton,SIGNAL(clicked()),this,SLOT(throwDice()));
 
@@ -55,11 +56,13 @@ int Game::start(int argc, char *argv[]){
 
     w.setLayout(layout);
     w.show();
-    int i=0;
-    int b=0;
 
-    for(int a=0;a<1;a++){
-    Player* p=new Player(&parent,4,a+1);
+    for(int a=0;a<2;a++){
+        Player* p;
+        if(a!=1)
+        p=new Player(&parent,4,a+1);
+        else
+             p= new ComputerPlayer(&parent,4,a+1);
         QList<Figure *>figures1=map->createStartHouse(p);
         foreach(Figure * fi, figures1)
              QObject::connect(fi,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
@@ -114,10 +117,18 @@ void Game::moveFigure(Figure *figure){
     if(result == true){
         DiceValue = 0;
         active = ++active % players.count();
-        if(active == NULL){
+        if(active == 0){
             active = 0;
             }
         }
+
+    if(players[active]->inherits("ComputerPlayer") ){
+        ComputerPlayer * player=(ComputerPlayer*)players[active];
+        throwDice();
+        player->play(DiceValue);
+
+    }
+
     }
 }
 
@@ -176,6 +187,6 @@ diceButton->setText(QString::number(DiceValue));
 }
 
 Game::~Game(){
-    delete &players;
-    delete diceButton;
+   // delete &players;
+   // delete diceButton;
 }

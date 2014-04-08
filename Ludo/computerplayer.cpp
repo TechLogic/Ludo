@@ -24,7 +24,8 @@ void ComputerPlayer::play(int value){
    }
    best = f.at(0);
    int i=0;
-   while(f.at(i) != NULL){
+   //while(f.at(i) != NULL){
+   for(i=0;i<f.count();i++){
         Field* field = f.at(i)->showMove(value);
 
         if(field != NULL){
@@ -45,7 +46,7 @@ void ComputerPlayer::play(int value){
             }
         }
 
-        i++;
+       // i++;
     }
 
    }
