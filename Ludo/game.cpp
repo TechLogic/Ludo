@@ -23,6 +23,7 @@ bool Game::move(Figure *figure){
        int newY = newField->getY();
         layout->removeWidget(figure);
         layout->addWidget(figure,newX,newY);
+        figure->raise();
        }
         return result;
     }else{
@@ -57,7 +58,7 @@ int Game::start(int argc, char *argv[]){
     int i=0;
     int b=0;
 
-    for(int a=0;a<4;a++){
+    for(int a=0;a<1;a++){
     Player* p=new Player(&parent,4,a+1);
         QList<Figure *>figures1=map->createStartHouse(p);
         foreach(Figure * fi, figures1)

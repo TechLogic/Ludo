@@ -22,13 +22,18 @@ QGridLayout* Map::createGrid(){
 void Map::createEndHouseOfPlayer(Player *player){
     int nr=player->getNr();
     Field *field=endPoint[nr-1];
-    int x=field->getY(),y=field->getX()+1;
-
+    int x=field->getY(),y=field->getX();
+    field->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
     player->setEnd(field);
 
-    field->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
-    for(int i=0;i<4;i++){
 
+    for(int i=0;i<4;i++){
+        switch(nr){
+        case 1:y++;break;
+        case 2:x--;break;
+        case 3:y--;break;
+        case 4:x++;break;
+        }
         if(i==0){
 
              field=new Field(w);
@@ -41,7 +46,11 @@ void Map::createEndHouseOfPlayer(Player *player){
 
         createField(field,y,x);
         field->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
-        y++;
+
+
+
+
+
 
     }
 }
@@ -141,13 +150,13 @@ std::cout<<start->text.toStdString()<<std::endl;
              y--;
          else if(i>=31 && i<=40)
              x--;
-         if(i==1 || i==10 || i==20 || i==30){
-             if(i==1){
+         if(i==41 || i==10 || i==20 || i==30){
+             /*if(i==){
              startPoint[3]=field;
-             }else{
+             }else{*/
                  startPoint[currentStartPointCount]=field;
              currentStartPointCount++;
-             }
+             //
          }
          if(i==9 || i==19|| i==29 || i==39){
                       endPoint[currentEndPointCount]=field;
