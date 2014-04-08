@@ -73,12 +73,11 @@ int Game::start(int argc, char *argv[]){
     w.setLayout(layout);
     w.show();
 
-    for(int a=0;a<2;a++){
+    for(int a=0;a<4;a++){
         Player* p;
-        if(a!=1)
+
         p=new Player(&parent,4,a+1);
-        else
-             p= new ComputerPlayer(&parent,4,a+1);
+
         QList<Figure *>figures1=map->createStartHouse(p);
         foreach(Figure * fi, figures1){
              QObject::connect(fi,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
@@ -118,23 +117,30 @@ void Game::moveFigure(Figure *figure){
 
 
 
-    if(FigureInEndHouse(figure)){
-
+    if(FigureInStartHouse(figure)){
+        std::cout<< DiceValue<<std::endl;
            if(DiceValue ==6){
+            std::cout<<"IN START HOUSE"<<std::endl;
             DiceValue=1;
-            moveFigure(figure);
+            move(figure);
+            DiceValue = 0;
         }else{
             return;
        }
     }else{
     bool result = move(figure);
     if(result == true){
+
+        if(DiceValue != 6){
         DiceValue = 0;
         active = ++active % players.count();
         if(active == 0){
             active = 0;
             }
+        }else{
+            DiceValue =0;
         }
+    }
 
     if(players[active]->inherits("ComputerPlayer") ){
         ComputerPlayer * player=(ComputerPlayer*)players[active];
@@ -194,11 +200,14 @@ void Game::throwDice(){
       diceButton->setText(QString::number(DiceValue));
       std::cout<<DiceValue<<std::endl;
     }
+            if(hasThreeThrows() && ThrowCount <2){
+                if(DiceValue != 6){
+                DiceValue = 0;
+                ThrowCount++;
+                }
 
-        if(hasThreeThrows() && ThrowCount <2){
-            DiceValue = 0;
-            ThrowCount++;
-         }
+            }
+
     }
 
 
