@@ -18,6 +18,7 @@ public:
      void setHome(Field*field);
      void setFigures(QList<Figure *>figures);
      void setStart(Field *field);
+     Field* getStartHouse();
      bool hasFigure(Figure *figure);
       QList<Figure *> getFigures();
      int getNr();

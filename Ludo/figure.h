@@ -21,7 +21,7 @@ public:
     QObject* getPlayer();
 
 
-signals: void clicked(Figure*); void enter(Figure*); void leave(Figure*);
+signals: void clicked(Figure*); void enter(Figure*); void leave(Figure*);void moved(Figure*);
 
 
 protected:

@@ -1,5 +1,5 @@
 #include "field.h"
-Field::Field(QWidget *parent):QLabel(parent),next(NULL),x(0),y(0){
+Field::Field(QWidget *parent):QLabel(parent),next(NULL),x(0),y(0),figure(NULL){
 }
  Field::~Field(){
     next=NULL;

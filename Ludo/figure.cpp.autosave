@@ -69,7 +69,6 @@ bool Figure::move(int value){
             while(start!= NULL){
                 if(start->containsFigure()== NULL){
                     start->setFigure(figure);
-                    std::cout<<start->getX()<<"/"<<start->getY()<<std::endl;
                     figure->setPosition(start);
                     emit figure->moved(figure);
                     break;

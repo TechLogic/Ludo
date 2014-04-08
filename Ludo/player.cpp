@@ -44,6 +44,10 @@ void Player::setFigures(QList<Figure *> figures ){
    // this->figures=figures;
 }
 
+Field* Player::getStartHouse(){
+    return start;
+}
+
 bool Player::hasWon(){
     Field* begin = home;
     Field* end =  home +figuresCount-1;

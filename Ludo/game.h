@@ -18,6 +18,7 @@ public:
     public slots:  void throwDice();
                    void showMove(Figure* figure);
                    void moveFigure(Figure* figure);
+                   void moveFigureBack(Figure* figure);
 
 private:
     QList<Player *>players ;
