@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
     QObject parent;
     srand(time(NULL));
     Game* game = new Game(&parent);
-    game->start(argc,argv,0,1);
+    game->start(argc,argv,1,1);
     //delete game;
 
 

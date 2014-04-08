@@ -83,11 +83,14 @@ int Game::start(int argc, char *argv[], int computerPlayer, int normalPlayer){
     for(int a=0;a<normalPlayer+computerPlayer;a++){
         Player* p;
 
-        if(a<normalPlayer)
-            p=new Player(&parent,4,a+1);
-        else
-            p= new ComputerPlayer(&parent,4,a+1);
 
+       if(a<normalPlayer)
+        p=new Player(&parent,4,a+1);
+        else{
+           p= new ComputerPlayer(&parent,4,a+1);
+           QObject::connect(this,SIGNAL(ComputerNextPlayer()),this,SLOT(nextPlayer()));
+
+       }
         QList<Figure *>figures1=map->createStartHouse(p);
         foreach(Figure * fi, figures1){
             QObject::connect(fi,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
@@ -214,6 +217,13 @@ void Game::nextPlayer(){
         }
 
         p->play(DiceValue);
+
+
+        //active = ++active % players.count();
+        ThrowCount = 0;
+        DiceValue = 0;
+        std::cout<<"EMIT SIGNAL"<<std::endl;
+        emit ComputerNextPlayer();
     }
     std::cout<<"next player"<<std::endl;
 }
