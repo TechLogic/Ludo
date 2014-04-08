@@ -15,6 +15,7 @@ void ComputerPlayer::play(int value){
        Field* field = startHouse;
        while(field!= NULL){
            if(field->containsFigure() != NULL){
+               best = (Figure*)field->containsFigure();
                emit best->clicked(best);
                return;
            }else{

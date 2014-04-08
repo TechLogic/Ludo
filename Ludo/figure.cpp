@@ -25,7 +25,7 @@ bool Figure::eventFilter(QObject *obj, QEvent *event){
             return true;
         }
     }
-
+    return false;
 }
 
 QWidget* Figure::getPositition(){

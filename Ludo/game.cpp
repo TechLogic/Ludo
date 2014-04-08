@@ -64,8 +64,6 @@ int Game::start(int argc, char *argv[]){
 
     w.setLayout(layout);
     w.show();
-    int i=0;
-    int b=0;
 
     for(int a=0;a<4;a++){
     Player* p=new Player(&parent,4,a+1);
