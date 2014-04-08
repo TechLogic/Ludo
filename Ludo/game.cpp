@@ -114,11 +114,7 @@ void Game::moveFigure(Figure *figure){
 
     if(FigureInEndHouse(figure)){
 
-       // if(((Player*)figure->getPlayer())->getHome()->getNext()->containsFigure() == NULL){
-        //       return;
-       // }
-
-        if(DiceValue ==6){
+           if(DiceValue ==6){
             DiceValue=1;
             moveFigure(figure);
         }else{
@@ -165,14 +161,14 @@ bool Game::hasThreeThrows(){
 
     QList<Figure *>figure =players[active]->getFigures();
 int i=0;
-while(figure.at(i) != NULL){
-    if(FigureInEndHouse(figure.at(i))||FigureInStartHouse(figure.at(i))){
-            //figure = figure++;
-            i++;
-        }else{
+foreach (Figure* f, figure) {
+
+  if(FigureInEndHouse(f)||FigureInStartHouse(f)){
+      }else{
             return false;
         }
     }
+
 
     return true;
 
