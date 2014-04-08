@@ -16,10 +16,10 @@ public:
      Field *getHome();
      void setEnd(Field *field);
      void setHome(Field*field);
-     void setFigures(Figure **figures);
+     void setFigures(QList<Figure *>figures);
      void setStart(Field *field);
      bool hasFigure(Figure *figure);
-      Figure **getFigures();
+      QList<Figure *> getFigures();
      int getNr();
 
 
@@ -29,7 +29,7 @@ private:
 
 
 protected:
-     Figure** figures;
+     QList<Figure*> figures;
 
      Field* start;
      Field* end;

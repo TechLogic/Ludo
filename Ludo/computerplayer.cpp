@@ -8,7 +8,7 @@ ComputerPlayer::ComputerPlayer(QObject *parent,int figuresCount,int nr): Player(
 }
 
 void ComputerPlayer::play(int value){
-   Figure** f = figures;
+   QList<Figure*> f = figures;
    Figure* best;
 
    if(value == 6){
@@ -22,10 +22,10 @@ void ComputerPlayer::play(int value){
            }
        }
    }
-   best = f[0];
+   best = f.at(0);
    int i=0;
-   while(f != NULL){
-        Field* field = f[i]->showMove(value);
+   while(f.at(i) != NULL){
+        Field* field = f.at(i)->showMove(value);
 
         if(field != NULL){
             if(field->containsFigure() != NULL){

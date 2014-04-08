@@ -19,7 +19,7 @@ public:
     Figure * getFigure(Player *player);
     void createEndHouseOfPlayer(Player *player);
     //start Field is next of StartHouse
-    Figure **createStartHouse(Player * player);
+    QList<Figure *> createStartHouse(Player * player);
 
     void createEndField(Player * player);
 
@@ -35,6 +35,7 @@ private:
     Field * endPoint [4];
     Field * start;
     int startHousePoint[4][2];
+   // Figure * figures[4];
 
     QGridLayout* createGrid();
     Field * drawColumn(QGridLayout * grid, int x, int y);

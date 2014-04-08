@@ -2,7 +2,7 @@
 #include "iostream"
 #include <QVector>
 
-Map::Map(QObject *parent):QObject(parent),startHousePoint({{12,1},{12,10},{0,11},{0,1}})
+Map::Map(QObject *parent):QObject(parent),startHousePoint({{13,1},{13,10},{0,10},{0,1}})
 {
     w= new QWidget();
     layout=createGrid();
@@ -72,15 +72,16 @@ void Map::createField(Field * field,int x, int y){
 
 }
 
-Figure **Map::createStartHouse(Player * pl){
+QList<Figure*>Map::createStartHouse(Player * pl){
     Field * house[4];
     for(int i=0;i<4;i++)
         house[i]=NULL;
-    Figure * figures[4];
+    QList< Figure* >  figures;
      int  nr= pl->getNr();
     int x=startHousePoint[nr-1][0],y=startHousePoint[nr-1][1];
     for(int i=0;i<4;i++){
         house[i]=new Field(w);
+        Figure *figure=this->getFigure(pl);
 
         if(i==2){
             x--;
@@ -93,13 +94,14 @@ Figure **Map::createStartHouse(Player * pl){
 
         //st.append(pl->getNr());
         house[i]->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
-        figures[i]=this->getFigure(pl);
-        house[i]->setFigure(figures[i]);
-        figures[i]->setPosition(house[i]);
-        house[i]->setNext(startPoint[0]);
-        layout->addWidget(figures[i],y,x);
+
+        house[i]->setFigure(figure);
+        figure->setPosition(house[i]);
+        house[i]->setNext(startPoint[nr-1]);
+        layout->addWidget(figure,y,x);
+        figures<<figure;
     }
-    startPoint[pl->getNr()-1]->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
+    startPoint[nr-1]->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
 
     pl->setStart(house[0]);
     pl->setFigures(figures);
@@ -113,11 +115,12 @@ void Map::createSpecialPoints(QGridLayout * grid){
 
 }
  Map::~Map(){delete w;
+            // delete figures;
             }
 
 
  QGridLayout * Map::createMap(){
-     int x=1,y=2;
+     int x=1,y=3;
      int currentStartPointCount=0;
      int currentEndPointCount=0;
      start= new Field(w);
@@ -138,9 +141,13 @@ std::cout<<start->text.toStdString()<<std::endl;
              y--;
          else if(i>=31 && i<=40)
              x--;
-         if(i==0 || i==10 || i==20 || i==30){
-             startPoint[currentStartPointCount]=field;
+         if(i==1 || i==10 || i==20 || i==30){
+             if(i==1){
+             startPoint[3]=field;
+             }else{
+                 startPoint[currentStartPointCount]=field;
              currentStartPointCount++;
+             }
          }
          if(i==9 || i==19|| i==29 || i==39){
                       endPoint[currentEndPointCount]=field;

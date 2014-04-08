@@ -15,7 +15,7 @@ int Game::rollDice(){
 
 bool Game::move(Figure *figure){
 
-    if(active->hasFigure(figure)){
+    if(players[active]->hasFigure(figure)){
        bool result= figure->move(DiceValue);
        if(result == true){
        Field* newField = (Field*)(figure->getPositition());
@@ -51,35 +51,22 @@ int Game::start(int argc, char *argv[]){
     layout->addWidget(&button,15,15);
 
 
-    players[0]=new Player(&parent,4,1);
-    players[1]=new Player(&parent,4,2);
-
-    //pl.setEnd(new Field(&w));
-    //pl.setHome(new Field(&w));
-    //Figure * f=map->getFigure(&pl);
-    //QObject::connect(f,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
-    // QObject::connect(f,SIGNAL(enter(Figure*)),this,SLOT(showMove(Figure*)));
-    //pl.setFigures(f);
-   // Field * fi=map->getStartField();
-
 
     w.setLayout(layout);
     w.show();
     int i=0;
     int b=0;
-   // active=pli[0];
-    //for(int a=0;a<2;a++){
-    //Player * p=&player[0];
-    for(int a=0;a<2;a++){
-    Player* p=new Player(&parent,4,1);
-    Figure **figures1=map->createStartHouse(p);
-        for(i=0;i<4;i++)
-             QObject::connect(figures1[i],SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
+
+    for(int a=0;a<4;a++){
+    Player* p=new Player(&parent,4,a+1);
+        QList<Figure *>figures1=map->createStartHouse(p);
+        foreach(Figure * fi, figures1)
+             QObject::connect(fi,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
         map->createEndHouseOfPlayer(p);
-        players[a]=p;
-   // }
+        players<<p;
+
 }
-    active=players[0];
+    active=0;
     return a.exec();
 }
 
@@ -125,9 +112,9 @@ void Game::moveFigure(Figure *figure){
     bool result = move(figure);
     if(result == true){
         DiceValue = 0;
-        active = active++;
+        active = ++active % players.count();
         if(active == NULL){
-            active = player;
+            active = 0;
             }
         }
     }
@@ -152,10 +139,10 @@ bool Game::FigureInStartHouse(Figure *figure){
 
 bool Game::hasThreeThrows(){
 
-    Figure **figure =active->getFigures();
+    QList<Figure *>figure =players[active]->getFigures();
 int i=0;
-while(figure[i] != NULL){
-    if(FigureInEndHouse(figure[i])||FigureInStartHouse(figure[i])){
+while(figure.at(i) != NULL){
+    if(FigureInEndHouse(figure.at(i))||FigureInStartHouse(figure.at(i))){
             //figure = figure++;
             i++;
         }else{
@@ -188,5 +175,5 @@ void Game::throwDice(){
 }
 
 Game::~Game(){
-    //delete players;
+    delete &players;
 }

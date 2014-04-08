@@ -20,9 +20,9 @@ public:
                    void moveFigure(Figure* figure);
 
 private:
-    Player *players [4];
-    Player * player;
-    Player *active;
+    QList<Player *>players ;
+   // Player * player;
+    int active;
     Map* map;
     QGridLayout* layout;
     Dice dice;

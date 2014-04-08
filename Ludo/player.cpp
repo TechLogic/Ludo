@@ -8,10 +8,10 @@ Player::Player(QObject *parent, int figuresCount, int nr):QObject(parent),
 }
 
  Player::~Player(){
-     delete figures;
+     delete &figures;
  }
 
-Figure** Player::getFigures(){
+QList<Figure *> Player::getFigures(){
     return figures;
 }
 
@@ -38,9 +38,9 @@ void Player::setStart(Field *field){
     this->start=field;
 }
 
-void Player::setFigures(Figure **figures ){
-    for(int i=0;i<4;i++)
-        this->figures[i]=figures[i];
+void Player::setFigures(QList<Figure *> figures ){
+    foreach(Figure * fi,figures)
+        this->figures<<fi;
    // this->figures=figures;
 }
 
@@ -68,13 +68,12 @@ bool Player::hasFigure(Figure *figure){
 
    // Figure* f [4];
     //f=figures;
-    if( figuresCount==1 && figures[0] == figure)
+    if( figuresCount==1 && figures.at(0) == figure)
         return true;
-int i=0;
        // Figure* end = f+figuresCount-1;
        // while(f < end){
-        for(i=0;i<4;i++){
-            Figure * fi=figures[i];
+        foreach(Figure * fi, this->figures){
+
             if( fi== figure){
            return true;
        }
