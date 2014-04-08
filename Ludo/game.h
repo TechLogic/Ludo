@@ -11,7 +11,7 @@ class Game : public QObject
     Q_OBJECT
 public:
     Game(QObject *parent);
-    int start(int argc, char *argv[]);
+    int start(int argc, char *argv[],int computerPlayer,int normalPlayer);
     void stop();
     ~Game();
 
@@ -30,6 +30,7 @@ private:
     QGridLayout* layout;
     Dice dice;
     int DiceValue;
+
     int rollDice();
     bool move(Figure *figure);
     void connectFigures();

@@ -217,10 +217,11 @@ void Game::nextPlayer(){
 
         p->play(DiceValue);
 
-        active = ++active % players.count();
-        ThrowCount = 0;
-        DiceValue = 0;
+        //active = ++active % players.count();
+        //ThrowCount = 0;
+       // DiceValue = 0;
        // emit this->nextPlayer();
+        emit this-
     }
     std::cout<<"next player"<<std::endl;
 }

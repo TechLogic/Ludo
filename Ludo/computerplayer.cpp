@@ -13,49 +13,46 @@ void ComputerPlayer::play(int value){
    QList<Figure*> f = figures;
    Figure* best;
 
-   if(value == 6){
-       //Field* field = startHouse;
+
+   if(start[0]->getNext()->containsFigure()!=NULL){
+       best=(Figure *)start[0]->getNext()->containsFigure();
+       emit best->clicked(best);
+       return;
+   }
+   if(value == 6  ){
        foreach(Field *field,start){
            if(field->containsFigure() != NULL){
 
                best = (Figure*)field->containsFigure();
-
                emit best->clicked(best);
+               moveableFigures<<best;
                return;
            }
        }
    }
-   best = f.at(0);
-   int i=0;
-   //while(f.at(i) != NULL){
-   foreach(Figure *fi,figures){
-       best = fi;
-        Field* field = fi->showMove(value);
-       // best=fi;
-        if(field != NULL){
-            if(field->containsFigure() != NULL){
-                best = (Figure*) field->containsFigure();
-                emit best->clicked(best);
-            }else{
-                Field* homeField = home;
-                while(homeField != NULL){
-                    if(field == homeField|| field == end){
-                        best = (Figure*) field->containsFigure();
-                        emit best->clicked(best);
-                        return;
-                    }else{
-                        homeField=homeField->getNext();
-                    }
-                }
-            }
-        }
 
-       // i++;
-    }
-    int fig =rand()%4;
-    std::cout<<"fig:"<<fig<<std::endl;
+  if(allFiguresInStartHouse())
+      return;
 
-    emit figures[fig]->clicked(figures[fig]);
+  foreach(Figure *f , moveableFigures){
+      Field * field=f->showMove(value);
+      Figure * figure=(Figure *)field->containsFigure();
+      if(figure!=NULL && !moveableFigures.contains(figure)){
+          emit figure->clicked(figure);
+          return;
+      }
+  }
+  bool canMoveSteps=false;
+  int fig=0;
+  while(!canMoveSteps){
+     fig =rand()%moveableFigures.count();
+     if(moveableFigures[fig]->showMove(value)!=NULL)
+         canMoveSteps=true;
+  }
+
+
+
+    emit moveableFigures[fig]->clicked(moveableFigures[fig]);
    }
 
 

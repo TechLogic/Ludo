@@ -10,11 +10,11 @@ Player::Player(QObject *parent, int figuresCount, int nr):QObject(parent),
  Player::~Player(){
      //figures=NULL;
  }
-Figure*  Player::getFigureFormStartHouse(){
+bool  Player::allFiguresInStartHouse(){
     foreach(Field * f,start)
-        if(f->containsFigure()!=NULL)
-            return (Figure *)f->containsFigure();
-    return NULL;
+        if(f->containsFigure()==NULL)
+            return false;
+    return true;
 }
 
 QList<Figure *> Player::getFigures(){

@@ -14,6 +14,7 @@ public:
 
 private:
     int figureBehind(Figure * fig);
+    QList<Figure *> moveableFigures;
     int getFieldsToFin(Figure *fig);
     bool isStartFieldFomOther(Field *f);
    // Field *startHouse;
