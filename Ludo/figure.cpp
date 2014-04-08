@@ -65,15 +65,20 @@ bool Figure::move(int value){
             Figure* figure =(Figure*)field->containsFigure();
             std::cout<<figure->getPositition()<<std::endl;
             Player* p= (Player*)figure->getPlayer();
+            if(p == this->player){
+             return false;
+            }
             Field* start= p->getStartHouse();
             while(start!= NULL){
-                if(start->containsFigure()== NULL){
+
+                    if(start->containsFigure()){
                     start->setFigure(figure);
-                    std::cout<<start->getX()<<"/"<<start->getY()<<std::endl;
                     figure->setPosition(start);
+                    std::cout<<start->getX()<<start->getY()<<std::endl;
                     emit figure->moved(figure);
                     break;
             }else{
+                    std::cout<<"Start++"<<std::endl;
                     start++;
                 }
             }
