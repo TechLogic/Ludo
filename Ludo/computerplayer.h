@@ -16,7 +16,7 @@ private:
     int figureBehind(Figure * fig);
     int getFieldsToFin(Figure *fig);
     bool isStartFieldFomOther(Field *f);
-    Field *startHouse;
+   // Field *startHouse;
 
 };
 

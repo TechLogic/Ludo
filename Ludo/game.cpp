@@ -4,6 +4,8 @@
 #include <QGridLayout>
 #include <iostream>
 #include "computerplayer.h"
+#include <stdlib.h>
+#include <unistd.h>
 Game::Game(QObject *parent):QObject(parent),map(NULL),dice(new Dice(parent)),DiceValue(0),active(0)//,players(){
 {}
 
@@ -59,10 +61,10 @@ int Game::start(int argc, char *argv[]){
 
     for(int a=0;a<2;a++){
         Player* p;
-        if(a!=1)
+        if(a<1)
         p=new Player(&parent,4,a+1);
         else
-             p= new ComputerPlayer(&parent,4,a+1);
+            p= new ComputerPlayer(&parent,4,a+1);
         QList<Figure *>figures1=map->createStartHouse(p);
         foreach(Figure * fi, figures1)
              QObject::connect(fi,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
@@ -98,8 +100,9 @@ bool Game::FigureInEndHouse(Figure *figure){
 
 void Game::moveFigure(Figure *figure){
 
-
-
+    if(DiceValue==0)
+        return;
+std::cout<<"normal"<<std::endl;
     if(FigureInEndHouse(figure)){
 
        // if(((Player*)figure->getPlayer())->getHome()->getNext()->containsFigure() == NULL){
@@ -122,14 +125,25 @@ void Game::moveFigure(Figure *figure){
             }
         }
 
-    if(players[active]->inherits("ComputerPlayer") ){
-        ComputerPlayer * player=(ComputerPlayer*)players[active];
-        throwDice();
-        player->play(DiceValue);
+
+    ComputerPlayer *p=dynamic_cast<ComputerPlayer*>(players[active]);
+    if(p!=NULL ){
+       // ComputerPlayer * player=players[active];
+        //sleep(10);
+std::cout<<"pc"<<std::endl;
+         throwDice();
+         //sleep(10);
+        int i=0;
+       /* for(i=0;i<4;i++){
+           Figure *f=p->getFigures()[i];
+           f=f;
+        }*/
+        p->play(DiceValue);
 
     }
 
     }
+    active = ++active % players.count();
 }
 
 bool Game::FigureInStartHouse(Figure *figure){
@@ -183,7 +197,7 @@ void Game::throwDice(){
 
     }
 diceButton->setText(QString::number(DiceValue));
-    std::cout<<DiceValue<<std::endl;
+    std::cout<<"l"<<DiceValue<<std::endl;
 }
 
 Game::~Game(){
