@@ -39,9 +39,9 @@ int Game::start(int argc, char *argv[]){
     QApplication a(argc,argv);
 
     QWidget w;
-    QPushButton button("6");
-    button.setText("6");
-    QObject::connect(&button,SIGNAL(clicked()),this,SLOT(throwDice()));
+    diceButton= new QPushButton ("6");
+    diceButton->setText("6");
+    QObject::connect(diceButton,SIGNAL(clicked()),this,SLOT(throwDice()));
 
 
     map = new Map(this->parent());
@@ -49,7 +49,7 @@ int Game::start(int argc, char *argv[]){
     w.setWindowTitle(
     QApplication::translate("Ludo", "Ludo"));
     layout=map->createMap();
-    layout->addWidget(&button,15,15);
+    layout->addWidget(diceButton,15,15);
 
 
 
@@ -171,10 +171,11 @@ void Game::throwDice(){
         }
 
     }
-
+diceButton->setText(QString::number(DiceValue));
     std::cout<<DiceValue<<std::endl;
 }
 
 Game::~Game(){
     delete &players;
+    delete diceButton;
 }

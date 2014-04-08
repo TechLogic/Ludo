@@ -21,6 +21,7 @@ public:
 
 private:
     QList<Player *>players ;
+    QPushButton * diceButton;
    // Player * player;
     int active;
     Map* map;
