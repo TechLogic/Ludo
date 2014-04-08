@@ -67,17 +67,15 @@ bool Figure::move(int value){
             if(p == this->player){
              return false;
             }
-            Field* start= p->getStartHouse();
-            while(start!= NULL){
+            QList<Field *> start= p->getStart();
 
-                    if(start->containsFigure()){
-                    start->setFigure(figure);
-                    figure->setPosition(start);
+            foreach(Field* f,start){
+                    if(f->containsFigure()){
+                    f->setFigure(figure);
+                    figure->setPosition(f);
                     emit figure->moved(figure);
                     break;
-            }else{
-                 start++;
-                }
+            }
             }
            }
            ((Field*)currentPos)->removeFigure();

@@ -45,7 +45,7 @@ void Player::setFigures(QList<Figure *> figures ){
    // this->figures=figures;
 }
 
-Field* Player::getStartHouse(){
+QList<Field *> Player::getStart(){
     return start;
 }
 
