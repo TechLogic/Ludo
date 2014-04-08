@@ -6,14 +6,14 @@ Map::Map(QObject *parent):QObject(parent),startHousePoint({{13,1},{13,10},{0,10}
 {
     w= new QWidget();
     layout=createGrid();
-   // startHousePoint=
+
 
 }
 
 
 QGridLayout* Map::createGrid(){
     QGridLayout *layout = new QGridLayout();
-   // w->setLayout(layout);
+
 
 
     return layout;
@@ -22,13 +22,18 @@ QGridLayout* Map::createGrid(){
 void Map::createEndHouseOfPlayer(Player *player){
     int nr=player->getNr();
     Field *field=endPoint[nr-1];
-    int x=field->getY(),y=field->getX()+1;
-
+    int x=field->getY(),y=field->getX();
+    field->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
     player->setEnd(field);
 
-    field->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
-    for(int i=0;i<4;i++){
 
+    for(int i=0;i<4;i++){
+        switch(nr){
+        case 1:y++;break;
+        case 2:x--;break;
+        case 3:y--;break;
+        case 4:x++;break;
+        }
         if(i==0){
 
              field=new Field(w);
@@ -41,7 +46,6 @@ void Map::createEndHouseOfPlayer(Player *player){
 
         createField(field,y,x);
         field->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
-        y++;
 
     }
 }
@@ -73,14 +77,13 @@ void Map::createField(Field * field,int x, int y){
 }
 
 QList<Figure*>Map::createStartHouse(Player * pl){
-    Field * house[4];
-    for(int i=0;i<4;i++)
-        house[i]=NULL;
+    QList<Field*> house;
     QList< Figure* >  figures;
      int  nr= pl->getNr();
     int x=startHousePoint[nr-1][0],y=startHousePoint[nr-1][1];
+
     for(int i=0;i<4;i++){
-        house[i]=new Field(w);
+        Field *houseField=new Field(w);
         Figure *figure=this->getFigure(pl);
 
         if(i==2){
@@ -88,22 +91,20 @@ QList<Figure*>Map::createStartHouse(Player * pl){
             y++;
         }else
             x++;
-        //figures[i]=getFigure(pl);
-        createField(house[i],y,x);
-        //char []text=":/image/field"+pl->getNr();
 
-        //st.append(pl->getNr());
-        house[i]->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
 
-        house[i]->setFigure(figure);
-        figure->setPosition(house[i]);
-        house[i]->setNext(startPoint[nr-1]);
+        createField(houseField,y,x);
+        houseField->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
+        houseField->setFigure(figure);
+        figure->setPosition(houseField);
+        houseField->setNext(startPoint[nr-1]);
         layout->addWidget(figure,y,x);
         figures<<figure;
+        house<<houseField;
     }
     startPoint[nr-1]->setPixmap(QPixmap(QString::fromUtf8(":/image/field%1").arg(QString::number(nr))));
 
-    pl->setStart(house[0]);
+    pl->setStart(house);
     pl->setFigures(figures);
     return figures;
 
@@ -141,13 +142,13 @@ std::cout<<start->text.toStdString()<<std::endl;
              y--;
          else if(i>=31 && i<=40)
              x--;
-         if(i==1 || i==10 || i==20 || i==30){
-             if(i==1){
+         if(i==41 || i==10 || i==20 || i==30){
+             /*if(i==){
              startPoint[3]=field;
-             }else{
+             }else{*/
                  startPoint[currentStartPointCount]=field;
              currentStartPointCount++;
-             }
+             //
          }
          if(i==9 || i==19|| i==29 || i==39){
                       endPoint[currentEndPointCount]=field;

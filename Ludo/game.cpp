@@ -3,7 +3,8 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include <iostream>
-Game::Game(QObject *parent):QObject(parent),map(NULL),dice(new Dice(parent)),DiceValue(0)//,players(){
+#include "computerplayer.h"
+Game::Game(QObject *parent):QObject(parent),map(NULL),dice(new Dice(parent)),DiceValue(0),active(0)//,players(){
 {}
 
 
@@ -33,6 +34,7 @@ bool Game::move(Figure *figure){
        int newY = newField->getY();
         layout->removeWidget(figure);
         layout->addWidget(figure,newX,newY);
+        figure->raise();
        }
         return result;
     }else{
@@ -48,9 +50,9 @@ int Game::start(int argc, char *argv[]){
     QApplication a(argc,argv);
 
     QWidget w;
-    QPushButton button("6");
-    button.setText("6");
-    QObject::connect(&button,SIGNAL(clicked()),this,SLOT(throwDice()));
+    diceButton= new QPushButton (&w);
+    diceButton->setText("6");
+    QObject::connect(diceButton,SIGNAL(clicked()),this,SLOT(throwDice()));
 
 
     map = new Map(this->parent());
@@ -58,15 +60,19 @@ int Game::start(int argc, char *argv[]){
     w.setWindowTitle(
     QApplication::translate("Ludo", "Ludo"));
     layout=map->createMap();
-    layout->addWidget(&button,15,15);
+    layout->addWidget(diceButton,15,15);
 
 
 
     w.setLayout(layout);
     w.show();
 
-    for(int a=0;a<4;a++){
-    Player* p=new Player(&parent,4,a+1);
+    for(int a=0;a<2;a++){
+        Player* p;
+        if(a!=1)
+        p=new Player(&parent,4,a+1);
+        else
+             p= new ComputerPlayer(&parent,4,a+1);
         QList<Figure *>figures1=map->createStartHouse(p);
         foreach(Figure * fi, figures1){
              QObject::connect(fi,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
@@ -123,10 +129,18 @@ void Game::moveFigure(Figure *figure){
     if(result == true){
         DiceValue = 0;
         active = ++active % players.count();
-        if(active == NULL){
+        if(active == 0){
             active = 0;
             }
         }
+
+    if(players[active]->inherits("ComputerPlayer") ){
+        ComputerPlayer * player=(ComputerPlayer*)players[active];
+        throwDice();
+        player->play(DiceValue);
+
+    }
+
     }
 }
 
@@ -180,10 +194,11 @@ void Game::throwDice(){
         }
 
     }
-
+diceButton->setText(QString::number(DiceValue));
     std::cout<<DiceValue<<std::endl;
 }
 
 Game::~Game(){
-    delete &players;
+   // delete &players;
+   // delete diceButton;
 }
