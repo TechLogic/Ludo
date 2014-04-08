@@ -63,7 +63,6 @@ bool Figure::move(int value){
 
            if(field->containsFigure()!=NULL){
             Figure* figure =(Figure*)field->containsFigure();
-            std::cout<<figure->getPositition()<<std::endl;
             Player* p= (Player*)figure->getPlayer();
             if(p == this->player){
              return false;
@@ -74,12 +73,10 @@ bool Figure::move(int value){
                     if(start->containsFigure()){
                     start->setFigure(figure);
                     figure->setPosition(start);
-                    std::cout<<start->getX()<<start->getY()<<std::endl;
                     emit figure->moved(figure);
                     break;
             }else{
-                    std::cout<<"Start++"<<std::endl;
-                    start++;
+                 start++;
                 }
             }
            }

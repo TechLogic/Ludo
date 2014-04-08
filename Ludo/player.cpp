@@ -64,9 +64,6 @@ bool Player::hasWon(){
 
 }
 
-void Player::setFigureToStart(){
-
-}
 
 bool Player::hasFigure(Figure *figure){
 

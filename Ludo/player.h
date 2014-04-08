@@ -10,8 +10,7 @@ class Player : public QObject
 public:
     Player(QObject *parent,int figuresCount,int nr);
      ~Player();
-    void setFigureToStart();
-    bool hasWon();
+     bool hasWon();
      Field* getEnd();
      Field *getHome();
      void setEnd(Field *field);
