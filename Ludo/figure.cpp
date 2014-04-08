@@ -70,7 +70,7 @@ bool Figure::move(int value){
             QList<Field *> start= p->getStart();
 
             foreach(Field* f,start){
-                    if(f->containsFigure()){
+                    if(f->containsFigure()==NULL){
                     f->setFigure(figure);
                     figure->setPosition(f);
                     emit figure->moved(figure);
