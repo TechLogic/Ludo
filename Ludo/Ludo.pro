@@ -13,7 +13,6 @@ TEMPLATE = app
 QMAKE_CXXFLAGS += -std=c++11
 
 SOURCES += main.cpp\
-        ludo.cpp \
     player.cpp \
     figure.cpp \
     field.cpp \
@@ -22,7 +21,7 @@ SOURCES += main.cpp\
     game.cpp \
     computerplayer.cpp
 
-HEADERS  += ludo.h \
+HEADERS  += \
     player.h \
     figure.h \
     field.h \

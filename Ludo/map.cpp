@@ -36,8 +36,8 @@ void Map::createEndHouseOfPlayer(Player *player){
         }
         if(i==0){
 
-             field=new Field(w);
-             player->setHome(field);
+            field=new Field(w);
+            player->setHome(field);
         }
         else{
             field->setNext(new Field(w));
@@ -55,7 +55,7 @@ Field * Map::getStartField(){
     return NULL;
 }
 
- Figure * Map::getFigure(Player *player){
+Figure * Map::getFigure(Player *player){
     Figure * figure= new Figure(w, player);
     int nr=player->getNr();
     figure->setPixmap(QPixmap(QString::fromUtf8(":/image/figure%1").arg(QString::number(nr))));
@@ -79,7 +79,7 @@ void Map::createField(Field * field,int x, int y){
 QList<Figure*>Map::createStartHouse(Player * pl){
     QList<Field*> house;
     QList< Figure* >  figures;
-     int  nr= pl->getNr();
+    int  nr= pl->getNr();
     int x=startHousePoint[nr-1][0],y=startHousePoint[nr-1][1];
 
     for(int i=0;i<4;i++){
@@ -115,48 +115,48 @@ QList<Figure*>Map::createStartHouse(Player * pl){
 void Map::createSpecialPoints(QGridLayout * grid){
 
 }
- Map::~Map(){delete w;
+Map::~Map(){delete w;
             // delete figures;
-            }
+           }
 
 
- QGridLayout * Map::createMap(){
-     int x=1,y=3;
-     int currentStartPointCount=0;
-     int currentEndPointCount=0;
-     start= new Field(w);
-     start->text="start";
-std::cout<<start->text.toStdString()<<std::endl;
-     Field * field=start;
+QGridLayout * Map::createMap(){
+    int x=1,y=3;
+    int currentStartPointCount=0;
+    int currentEndPointCount=0;
+    start= new Field(w);
+    start->text="start";
+    std::cout<<start->text.toStdString()<<std::endl;
+    Field * field=start;
 
-     createField(field,x,y);
-     for(int i=1;i<=41;i++){
-         field->setNext(new Field(w));
-         field=field->getNext();
-         field->text="x,y";
-         if(i<11)
-             y++;
-         else if(i>=11 && i<21)
-             x++;
-         else if(i>=21 && i<31)
-             y--;
-         else if(i>=31 && i<=40)
-             x--;
-         if(i==41 || i==10 || i==20 || i==30){
-             /*if(i==){
+    createField(field,x,y);
+    for(int i=1;i<=41;i++){
+        field->setNext(new Field(w));
+        field=field->getNext();
+        field->text="x,y";
+        if(i<11)
+            y++;
+        else if(i>=11 && i<21)
+            x++;
+        else if(i>=21 && i<31)
+            y--;
+        else if(i>=31 && i<=40)
+            x--;
+        if(i==41 || i==10 || i==20 || i==30){
+            /*if(i==){
              startPoint[3]=field;
              }else{*/
-                 startPoint[currentStartPointCount]=field;
-             currentStartPointCount++;
-             //
-         }
-         if(i==9 || i==19|| i==29 || i==39){
-                      endPoint[currentEndPointCount]=field;
-                      currentEndPointCount++;
-                  }
+            startPoint[currentStartPointCount]=field;
+            currentStartPointCount++;
+            //
+        }
+        if(i==9 || i==19|| i==29 || i==39){
+            endPoint[currentEndPointCount]=field;
+            currentEndPointCount++;
+        }
         createField(field,x,y);
-     }
+    }
 
-     field->setNext(start);
-     return layout;
+    field->setNext(start);
+    return layout;
 }

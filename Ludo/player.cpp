@@ -7,9 +7,9 @@ Player::Player(QObject *parent, int figuresCount, int nr):QObject(parent),
 
 }
 
- Player::~Player(){
-     //figures=NULL;
- }
+Player::~Player(){
+    //figures=NULL;
+}
 bool  Player::allFiguresInStartHouse(){
     foreach(Field * f,start)
         if(f->containsFigure()==NULL)
@@ -48,12 +48,13 @@ void Player::setStart(QList<Field *>field){
 void Player::setFigures(QList<Figure *> figures ){
     foreach(Figure * fi,figures)
         this->figures<<fi;
-   // this->figures=figures;
+    // this->figures=figures;
 }
 
 QList<Field *> Player::getStart(){
     return start;
 }
+
 
 bool Player::hasWon(){
     Field* begin = home;
@@ -62,7 +63,7 @@ bool Player::hasWon(){
 
     while ( begin < end ){
         if(begin->containsFigure()!= NULL){
-        begin++;
+            begin++;
         }else{
             return false;
         }
@@ -74,20 +75,17 @@ bool Player::hasWon(){
 
 bool Player::hasFigure(Figure *figure){
 
-   // Figure* f [4];
-    //f=figures;
     if( figuresCount==1 && figures.at(0) == figure)
         return true;
-       // Figure* end = f+figuresCount-1;
-       // while(f < end){
-        foreach(Figure * fi, this->figures){
 
-            if( fi== figure){
-           return true;
-       }
-      // f++;
+    foreach(Figure * fi, this->figures){
+
+        if( fi== figure){
+            return true;
+        }
     }
-   return false;
+
+    return false;
 }
 
 

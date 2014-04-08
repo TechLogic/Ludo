@@ -1,4 +1,4 @@
-#include "ludo.h"
+
 #include "game.h"
 #include<time.h>
 int main(int argc, char *argv[])
@@ -7,7 +7,7 @@ int main(int argc, char *argv[])
     srand(time(NULL));
     Game* game = new Game(&parent);
     game->start(argc,argv,1,1);
-    //delete game;
+
 
 
 }
