@@ -54,6 +54,11 @@ int Game::start(int argc, char *argv[]){
     diceButton->setText("6");
     QObject::connect(diceButton,SIGNAL(clicked()),this,SLOT(throwDice()));
 
+    QPushButton* Next= new QPushButton (&w);
+    Next->setText("Next Player");
+    QObject::connect(Next,SIGNAL(clicked()),this,SLOT(nextPlayer()));
+
+
 
     map = new Map(this->parent());
     w.setMinimumSize(500,500);
@@ -61,6 +66,7 @@ int Game::start(int argc, char *argv[]){
     QApplication::translate("Ludo", "Ludo"));
     layout=map->createMap();
     layout->addWidget(diceButton,15,15);
+    layout->addWidget(Next,16,15);
 
 
 
@@ -142,14 +148,11 @@ void Game::moveFigure(Figure *figure){
 
 bool Game::FigureInStartHouse(Figure *figure){
 
-    return false;
     Player* player=(Player*)figure->getPlayer();
-    Field* startHouse = player->getHome();
-    while(startHouse != NULL){
-        if (startHouse->containsFigure() == figure){
+    QList<Field*> startHouse = player->getStart();
+    foreach(Field* f,startHouse){
+        if (f->containsFigure() == figure){
            return true;
-        }else{
-            startHouse++;
         }
     }
     return false;
@@ -175,24 +178,29 @@ foreach (Figure* f, figure) {
 
 }
 
+void Game::nextPlayer(){
+    active = ++active%players.count();
+    ThrowCount = 0;
+    DiceValue = 0;
+    std::cout<<"NEXT PLAYER"<<std::endl;
+}
+
 void Game::throwDice(){
 
 
 
-    if(DiceValue %6 == 0){
+    if(DiceValue == 0){
+      DiceValue += rollDice();
+      diceButton->setText(QString::number(DiceValue));
+      std::cout<<DiceValue<<std::endl;
+    }
 
-
-        DiceValue += rollDice();
-    }else{
-        if(hasThreeThrows() && ThrowCount >3){
+        if(hasThreeThrows() && ThrowCount <2){
             DiceValue = 0;
             ThrowCount++;
-        }
-
+         }
     }
-diceButton->setText(QString::number(DiceValue));
-    std::cout<<DiceValue<<std::endl;
-}
+
 
 Game::~Game(){
    // delete &players;

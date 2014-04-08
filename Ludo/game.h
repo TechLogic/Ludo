@@ -19,6 +19,7 @@ public:
                    void showMove(Figure* figure);
                    void moveFigure(Figure* figure);
                    void moveFigureBack(Figure* figure);
+                   void nextPlayer();
 
 private:
     QList<Player *>players ;
