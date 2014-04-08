@@ -14,7 +14,7 @@ public:
     int start(int argc, char *argv[],int computerPlayer,int normalPlayer);
     void stop();
     ~Game();
-
+signals: void ComputerNextPlayer();
     public slots:  void throwDice();
                    void showMove(Figure* figure);
                    void moveFigure(Figure* figure);
