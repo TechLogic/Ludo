@@ -18,7 +18,8 @@ void ComputerPlayer::play(int value){
        foreach(Field *field,start){
            if(field->containsFigure() != NULL){
 
-               best=(Figure*)field->containsFigure();
+               best = (Figure*)field->containsFigure();
+
                emit best->clicked(best);
                return;
            }

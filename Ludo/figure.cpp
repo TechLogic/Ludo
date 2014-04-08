@@ -25,7 +25,7 @@ bool Figure::eventFilter(QObject *obj, QEvent *event){
             return true;
         }
     }
-
+    return false;
 }
 
 QWidget* Figure::getPositition(){
@@ -60,8 +60,27 @@ Field* Figure::showMove(int value){
 bool Figure::move(int value){
        Field *field = showMove(value);
        if(field!= NULL){
-       ((Field*)currentPos)->removeFigure();
-        field->setFigure(this);
+
+           if(field->containsFigure()!=NULL){
+            Figure* figure =(Figure*)field->containsFigure();
+            Player* p= (Player*)figure->getPlayer();
+            if(p == this->player){
+             return false;
+            }
+            QList<Field *> start= p->getStart();
+
+            foreach(Field* f,start){
+                    if(f->containsFigure()==NULL){
+                    f->setFigure(figure);
+                    figure->setPosition(f);
+                    emit figure->moved(figure);
+                    break;
+            }
+            }
+           }
+           ((Field*)currentPos)->removeFigure();
+           field->setFigure(this);
+
         currentPos = field;
         return true;
 }else{

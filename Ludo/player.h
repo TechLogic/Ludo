@@ -10,14 +10,14 @@ class Player : public QObject
 public:
     Player(QObject *parent,int figuresCount,int nr);
      ~Player();
-    void setFigureToStart();
-    bool hasWon();
+     bool hasWon();
      Field* getEnd();
      Field *getHome();
      void setEnd(Field *field);
      void setHome(Field*field);
      void setFigures(QList<Figure *>figures);
      void setStart(QList<Field *> field);
+     QList<Field*> getStart();
      bool hasFigure(Figure *figure);
      Figure*  getFigureFormStartHouse();
       QList<Figure *> getFigures();

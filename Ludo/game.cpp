@@ -16,6 +16,16 @@ int Game::rollDice(){
     return dice.roll();
 }
 
+void Game::moveFigureBack(Figure *figure){
+    Field* newField = (Field*)(figure->getPositition());
+
+    int newX = newField->getX();
+    int newY = newField->getY();
+    std::cout<<newX<<"/"<<newY<<std::endl;
+    layout->removeWidget(figure);
+     layout->addWidget(figure,newX,newY);
+}
+
 bool Game::move(Figure *figure){
 
     if(players[active]->hasFigure(figure)){
@@ -66,8 +76,10 @@ int Game::start(int argc, char *argv[]){
         else
             p= new ComputerPlayer(&parent,4,a+1);
         QList<Figure *>figures1=map->createStartHouse(p);
-        foreach(Figure * fi, figures1)
+        foreach(Figure * fi, figures1){
              QObject::connect(fi,SIGNAL(clicked(Figure*)),this,SLOT(moveFigure(Figure*)));
+             QObject::connect(fi,SIGNAL(moved(Figure*)),this,SLOT(moveFigureBack(Figure*)));
+        }
         map->createEndHouseOfPlayer(p);
         players<<p;
 
@@ -139,11 +151,11 @@ std::cout<<"pc"<<std::endl;
            f=f;
         }*/
         p->play(DiceValue);
-
+active = ++active % players.count();
     }
 
     }
-    active = ++active % players.count();
+
 }
 
 bool Game::FigureInStartHouse(Figure *figure){

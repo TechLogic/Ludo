@@ -51,6 +51,10 @@ void Player::setFigures(QList<Figure *> figures ){
    // this->figures=figures;
 }
 
+QList<Field *> Player::getStart(){
+    return start;
+}
+
 bool Player::hasWon(){
     Field* begin = home;
     Field* end =  home +figuresCount-1;
@@ -67,9 +71,6 @@ bool Player::hasWon(){
 
 }
 
-void Player::setFigureToStart(){
-
-}
 
 bool Player::hasFigure(Figure *figure){
 
